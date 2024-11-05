@@ -1,0 +1,44 @@
+services:
+
+  # MySQL database service
+  mysql:
+    image: mysql:9.0
+    environment:
+      MYSQL_DATABASE: /run/secrets/mysql_database
+      MYSQL_USER: /run/secrets/mysql_user
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+    secrets:
+      - mysql_database
+      - mysql_user
+      - mysql_root_password
+      - mysql_password
+    ports:
+      - "3306:3306"
+
+  # Spring Boot application
+  springboot-app:
+    build:
+      context: ./springboot-app # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile # Specify the Dockerfile name if not default
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydatabase
+      SPRING_DATASOURCE_USERNAME_FILE: /run/secrets/mysql_user
+      SPRING_DATASOURCE_PASSWORD_FILE: /run/secrets/mysql_password
+    secrets:
+      - mysql_user
+      - mysql_password
+
+secrets:
+  mysql_database:
+    file: ./secrets/mysql_database.txt
+  mysql_root_password:
+    file: ./secrets/mysql_root_password.txt
+  mysql_password:
+    file: ./secrets/mysql_password.txt
+  mysql_user:
+    file: ./secrets/mysql_user.txt
