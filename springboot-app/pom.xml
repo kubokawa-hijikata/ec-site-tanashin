@@ -11,7 +11,7 @@
 	<groupId>com.development</groupId>
 	<artifactId>springboot-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springboot-app</name>
+	<name>spring-boot-app</name>
 	<description>ec site project</description>
 	<url/>
 	<licenses>
@@ -39,6 +39,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
