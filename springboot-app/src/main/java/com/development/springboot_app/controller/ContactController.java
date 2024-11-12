@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ContactController {
 
-    // contactページへ遷移
+    // お問い合わせ内容を送信するための処理を行うクラス
+
+    // 「contact」画面へ遷移
     @GetMapping("/contact")
     public String contact() {
         return "contact";
     }
-
-    // お問い合わせ内容を送信するための処理
-    
+ 
 }
