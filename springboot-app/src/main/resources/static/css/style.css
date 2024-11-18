@@ -43,6 +43,17 @@
     line-height: 25px;/*高さと合わせる*/
 }
 
+/* navbarで{main}タグの上部分が隠れてしまうので50px分ずらす */
 body {
     padding-top: 50px;
+}
+
+/* navbar内のプライバシーポリシー/特定商取引法に基づく表記について */
+/* デフォルトの文字色を灰色、ホバーすると文字色を黒色に変更 */
+.nav-rules {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.nav-rules:hover {
+    color: rgba(0, 0, 0, 0.8);
 }
