@@ -51,9 +51,32 @@ body {
 /* navbar内のプライバシーポリシー/特定商取引法に基づく表記について */
 /* デフォルトの文字色を灰色、ホバーすると文字色を黒色に変更 */
 .nav-rules {
+    font-size: small;
     color: rgba(0, 0, 0, 0.65);
 }
 
 .nav-rules:hover {
     color: rgba(0, 0, 0, 0.8);
+}
+
+.cart-container {
+    padding-right: 1.5em;
+}
+
+@media (min-width: 768px) {
+    .nav-rules-container {
+        display: none;
+    }
+    .nav-container-margin {
+        margin-right: 0px;
+    }
+  }
+
+@media (max-width: 768px) {
+    .nav-rules-container-lg {
+        display: none;
+    }
+    .nav-container-margin {
+        margin-left: 0px;
+    }
 }
