@@ -23,7 +23,7 @@ public class CustomerService {
     }
 
     public Customer getOne(int id) {
-        return customerRepository.findById(id).orElseThrow(()->new RuntimeException("id=" + id + "の顧客は存在しません。"));
+        return customerRepository.findById(id).orElseThrow(()->new RuntimeException("id=" + id + "のお客様は存在しません。"));
     }
     
 }

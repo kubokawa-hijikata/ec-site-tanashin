@@ -23,7 +23,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    // 全ての顧客情報を取得する
+    // 全てのお客様情報を取得する
     @GetMapping("")
     public List<Customer> getAllCustomers() {
 
@@ -32,7 +32,7 @@ public class CustomerController {
         return customers;
     }
 
-    // 1人の顧客情報を取得する
+    // 1人のお客様情報を取得する
     @GetMapping("/{id}")
     public Customer getCustomer(
         @PathVariable("id") int id
