@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="https://www.thymeleaf.org/">
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>お問い合わせ|TanaShin</title>
@@ -8,44 +8,28 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <header id="header"></header>
-
 <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
-
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
         <h1 class="fw-bold">お問い合わせはこちらから。</h1>
 
         <form id="contact-form" th:action="@{/contact}"  method="post">
-            <div>
-                <label>お名前：</label>
-                <input type="text" th:name="name" />
-            </div>
-            <div>
-                <label>電話番号：</label>
-                <input type="text" th:name="phoneNumber" />
-            </div>
-            <div>
-                <label>メールアドレス：</label>
-                <input type="email" th:name="email" />
-            </div>
-            <div>
-                <label>件名：</label>
-                <input type="text" th:name="subject" />
-            </div>
-            <div>
-                <label>お問い合わせ内容：</label>
-                <input type="text" th:name="content" />
-            </div>
-            <button type="submit" id="submit-button">送信</button>
+            <dl>
+                <dt><label for="name">お名前</label></dt>
+                <dd><input type="text" th:name="name" /></dd>
+                <dt><label for="phoneNumber">電話番号</label></dt>
+                <dd><input type="text" th:name="phoneNumber" /></dd>
+                <dt><label for="email">メールアドレス</label></dt>
+                <dd><input type="text" th:name="email" /></dd>
+                <dt><label for="subject">件名</label></dt>
+                <dd><input type="text" th:name="subject" /></dd>
+                <dt><label for="content">お問い合わせ内容</label></dt>
+                <dd><textarea name="content" cols="30" rows="5"></textarea></dd>
+              </dl>
+              <button type="submit" id="submit-button">送信</button>
         </form>
-
-
     </main>
-
 <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
-
-    <footer id="footer"></footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <script src="/js/function.js"></script>

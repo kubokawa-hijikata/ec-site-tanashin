@@ -22,7 +22,7 @@ public class Work {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -49,7 +49,7 @@ public class Work {
         
     }
 
-    public Work(int id, String name, String description, int verticalSize, int horizontalSize, int price, List<Images> images, Orders order) {
+    public Work(Integer id, String name, String description, int verticalSize, int horizontalSize, int price, List<Images> images, Orders order) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -60,11 +60,11 @@ public class Work {
         this.order = order;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

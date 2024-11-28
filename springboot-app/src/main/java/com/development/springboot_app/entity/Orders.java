@@ -21,7 +21,7 @@ public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
@@ -38,18 +38,18 @@ public class Orders {
 
     }
 
-    public Orders(int id, Customer customer, List<Work> works, Date date) {
+    public Orders(Integer id, Customer customer, List<Work> works, Date date) {
         this.id = id;
         this.customer = customer;
         this.works = works;
         this.date = date;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -19,7 +19,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -43,7 +43,7 @@ public class Customer {
 
     }
 
-    public Customer(int id, String name, String email, String prefecture, String city, String address, String postalCode, List<Orders> orders) {
+    public Customer(Integer id, String name, String email, String prefecture, String city, String address, String postalCode, List<Orders> orders) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,11 +54,11 @@ public class Customer {
         this.orders = orders;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
