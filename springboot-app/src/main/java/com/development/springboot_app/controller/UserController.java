@@ -1,34 +1,34 @@
 package com.development.springboot_app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.development.springboot_app.entity.User;
-import com.development.springboot_app.services.UserService;
 
-@RestController
-@RequestMapping("/users")
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@Controller
 public class UserController {
 
-    private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    // ログイン画面へ遷移
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
-    // 管理者情報を取得する
-    @GetMapping("/{id}")
-    public User getUser(
-        @PathVariable("id") int id
-    ) {
+    // ログアウトを行う
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
 
-        User user = userService.getOne(id);
-        return user;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // ログアウト後にADMIN権限をなくすための処理
+        if (authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
+        return "redirect:/";
     }
-
-    // 管理者がログイン/ログアウトするための処理
     
 }

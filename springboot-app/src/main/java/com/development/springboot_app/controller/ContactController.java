@@ -20,6 +20,12 @@ public class ContactController {
         this.contactService = contactService;
     }
 
+    // 「contact」画面へ遷移
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
+
     // お客様からの問い合わせメールを受信するための処理
     @PostMapping("/contact")
     public String getMessage(
@@ -37,12 +43,6 @@ public class ContactController {
 
         contactService.getMessege(subject, text);
 
-        return "contact";
-    }
-
-    // 「contact」画面へ遷移
-    @GetMapping("/contact")
-    public String contact() {
         return "contact";
     }
  
