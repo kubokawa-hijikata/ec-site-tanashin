@@ -23,4 +23,8 @@ public class WorkService {
     public Work getOne(int id) {
         return workRepository.findById(id).orElseThrow(()->new RuntimeException("id=" + id + "の作品は存在しません。"));
     }
+
+    public void addNew(Work work) {
+        workRepository.save(work);
+    }
 }

@@ -42,16 +42,6 @@
                     <div id="image-repeat">
                         <div class='row'>
                             <div class='col-md-4 pr-1'>
-                                <!-- <input
-                                    type="text"
-                                    th:field="*{images[__${iterStat.index}__].id}"
-                                    hidden
-                                />
-                                <input 
-                                    placeholder="イメージ画像"
-                                    type="text" 
-                                    th:field="*{images[__${iterStat.index}__].name}"
-                                /> -->
                                 <input 
                                     type="file" 
                                     placeholder="イメージ画像"
@@ -74,70 +64,15 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div>
-                    <div class="col-md-5 me-5">
-                        <label class="heading_font font_sub_heading_color">イメージ画像①</label>
-                        <input
-                                type="file"
-                                name="image1"
-                                accept="image/png, image/jpeg"
-                        />
-                    </div>
-                    <div class="col-md-5 me-5">
-                        <label class="heading_font font_sub_heading_color">イメージ画像②</label>
-                        <input
-                                type="file"
-                                name="image2"
-                                accept="image/png, image/jpeg"
-                        />
-                    </div>
-                </div> -->
-
             </div>
             <div class="mt-2">
                 <button type="submit">販売</button>
             </div>
         </form>
-
     </main>
 <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <script src="/js/function.js"></script>
-    <script>
-     var counter = 0;
-     $(document).on("click", "#addImage", function (e) {
-       e.preventDefault();
-       counter++;
-        var newRow = jQuery(
-                   "<div id='image-repeat'>"+
-                   "  <div class='row'>"+
-                   "    <div class='col-md-4 pr-1'>"+
-                //    "      <input"+
-                //    "        hidden"+
-                //    "        type='text'"+
-                //    "        name='images["+counter+"].id'"+
-                //    "      />"+
-                //    "      <input"+
-                //    "        type='text'"+
-                //    "        placeholder='イメージ画像'"+
-                //    "        name='images["+counter+"].name'"+
-                //    "      />"+
-                   "      <input"+
-                   "        type='file'"+
-                   "        placeholder='イメージ画像'"+
-                   "        name='imagesFile'"+
-                   "      />"+                   
-                   "    </div>"+
-                   "  </div>"+
-                   "</div>");
-        console.log(newRow);
-       $('#image-repeat')
-         .parent('div.parent')
-         .append(newRow);
-
-     });
-    </script>
 </body>
 </html>

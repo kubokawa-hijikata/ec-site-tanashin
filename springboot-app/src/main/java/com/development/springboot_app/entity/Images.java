@@ -30,6 +30,10 @@ public class Images {
 
     }
 
+    public Images(String name) {
+        this.name = name;
+    }
+
     public Images(int id, String name, Work work) {
         this.id = id;
         this.name = name;

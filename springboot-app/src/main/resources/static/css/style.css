@@ -80,3 +80,15 @@ body {
         margin-left: 0px;
     }
 }
+
+table,
+table th,
+table td {
+    border: 1px solid black;
+}
+
+table th,
+table td {
+    padding-right: 0.5rem !important;
+    padding-left: 0.5rem !important;
+}

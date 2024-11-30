@@ -44,7 +44,7 @@ public class WebSecurityConfig {
                 .successHandler(customAuthenticationSuccessHandler))
                 .logout(logout-> {
                     logout.logoutUrl("/logout");
-                    logout.logoutSuccessUrl("/");
+                    logout.logoutSuccessUrl("/login");
                 }).cors(Customizer.withDefaults())
                 .csrf(csrf->csrf.disable());
 

@@ -32,6 +32,8 @@ public class Customer {
     
     private String address;
 
+    private String building;
+
     @Column(name = "postal_code")
     private String postalCode;
 
@@ -43,13 +45,14 @@ public class Customer {
 
     }
 
-    public Customer(Integer id, String name, String email, String prefecture, String city, String address, String postalCode, List<Orders> orders) {
+    public Customer(Integer id, String name, String email, String prefecture, String city, String address, String building, String postalCode, List<Orders> orders) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.prefecture = prefecture;
         this.city = city;
         this.address = address;
+        this.building = building;
         this.postalCode = postalCode;
         this.orders = orders;
     }
@@ -102,6 +105,14 @@ public class Customer {
         this.address = address;
     }
 
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
     public String getPostalCode() {
         return postalCode;
     }
@@ -127,6 +138,7 @@ public class Customer {
                 ", prefecture='" + prefecture + '\'' +
                 ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
+                ", building='" + building + '\'' +
                 ", postalCode='" + postalCode + '\'' +
                 '}';
     }

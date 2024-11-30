@@ -13,9 +13,12 @@
 <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
-        <div sec:authorize="hasAuthority('ADMIN')">
-            <button onclick="window.location.href='/logout'">ログアウト</button>
-            <a href="/admin/post-work">作品販売をする</a>
+        <div class="d-flex justify-content-end" sec:authorize="hasAuthority('ADMIN')">
+            <div class="me-1">
+                <button onclick="window.location.href='/logout'">ログアウト</button>
+                <a href="/admin/post-work">作品販売をする</a>
+                <a href="/admin/check-orders">購入情報</a>
+            </div>
         </div>
         <h1 class="fw-bold">田中辰太朗のサイトを構築しましょう。</h1>
         <div class="fs-3">久保川、土方が開発します。</div>

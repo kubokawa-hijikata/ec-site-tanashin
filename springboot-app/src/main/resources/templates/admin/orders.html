@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tanashin</title>
+    <script src="https://kit.fontawesome.com/3c982ecd98.js" crossorigin="anonymous"></script>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+</head>
+<body>
+<!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
+    <main>
+        <div>
+            <div>お客さんが注文した際、注文番号を乱数で生み出す。</div>
+            <div>このテーブルの注文番号を押下して、お客さんが購入した商品を確認できるようにする。</div>
+            <div>発送手続きは「完」「未」のどちらかを表示し、対応状況を確認できるようにする。</div>
+        </div>
+        <div sec:authorize="hasAuthority('ADMIN')">
+            <table>
+                <tr class="text-center">
+                    <th>注文日時</th>
+                    <th>注文番号</th>
+                    <th>顧客名</th>
+                    <th>Eメール</th>
+                    <th>住所</th>
+                    <th>決済方法</th>
+                    <th>発送手続き</th>
+                </tr>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.date}"></td>
+                    <td></td>
+                    <td th:text="${order.customer.name}"></td>
+                    <td th:text="${order.customer.email}"></td>
+                    <td>
+                        〒<span th:text="${order.customer.postalCode}"></span>
+                        <span th:text="${order.customer.prefecture}"></span>
+                        <span th:text="${order.customer.city}"></span>
+                        <span th:text="${order.customer.address}"></span>
+                        <span th:text="${order.customer.building}"></span>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+<!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/function.js"></script>
+</body>
+</html>
