@@ -19,9 +19,5 @@ public class OrdersService {
     public List<Orders> getAll() {
         return ordersRepository.findAll();
     }
-
-    public Orders getOne(int id) {
-        return ordersRepository.findById(id).orElseThrow(()->new RuntimeException("id=" + id + "の注文は存在しません。"));
-    }
     
 }

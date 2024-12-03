@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tanashin</title>
+    <script src="https://kit.fontawesome.com/3c982ecd98.js" crossorigin="anonymous"></script>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+</head>
+<body>
+<!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
+    <main>
+        <div sec:authorize="hasAuthority('ADMIN')">
+            <table>
+                <tr class="text-center">
+                    <th>作品番号</th>
+                    <th>作品名</th>
+                    <th>値段</th>
+                    <th>作品画像</th>
+                </tr>
+                <tr th:each="work : ${works}">
+                    <td th:text="${work.id}"></td>
+                    <td th:text="${work.name}"></td>
+                    <td th:text="${work.price}"></td>
+                    <td>
+                        <img height="100px" class="object-fit-cover" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="作品イメージ" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+<!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/function.js"></script>
+</body>
+</html>

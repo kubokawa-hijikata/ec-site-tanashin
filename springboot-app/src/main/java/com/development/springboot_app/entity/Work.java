@@ -49,6 +49,10 @@ public class Work {
         
     }
 
+    public Work(Integer id) {
+        this.id = id;
+    }
+
     public Work(Integer id, String name, String description, int verticalSize, int horizontalSize, int price, List<Images> images, Orders order) {
         this.id = id;
         this.name = name;

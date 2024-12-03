@@ -19,9 +19,9 @@
         </div>
         <div sec:authorize="hasAuthority('ADMIN')">
             <table>
-                <tr class="text-center">
+                <tr>
                     <th>注文日時</th>
-                    <th>注文番号</th>
+                    <th>注文番号(注文詳細)</th>
                     <th>顧客名</th>
                     <th>Eメール</th>
                     <th>住所</th>
@@ -30,7 +30,9 @@
                 </tr>
                 <tr th:each="order : ${orders}">
                     <td th:text="${order.date}"></td>
-                    <td></td>
+                    <td>
+                        <a th:href="@{/admin/check-orders/{id}(id=${order.id})}" th:text="${order.orderNumber}"></a>
+                    </td>
                     <td th:text="${order.customer.name}"></td>
                     <td th:text="${order.customer.email}"></td>
                     <td>
@@ -40,8 +42,13 @@
                         <span th:text="${order.customer.address}"></span>
                         <span th:text="${order.customer.building}"></span>
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td th:text="${order.payMethod}"></td>
+                    <th:block th:if="${order.ship}">
+                        <td>完</td>
+                    </th:block>
+                    <th:block th:unless="${order.ship}">
+                        <td>未</td>
+                    </th:block>
                 </tr>
             </table>
         </div>

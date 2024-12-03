@@ -1,8 +1,10 @@
 package com.development.springboot_app.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +25,7 @@ import com.development.springboot_app.entity.Orders;
 import com.development.springboot_app.entity.Work;
 import com.development.springboot_app.services.OrdersService;
 import com.development.springboot_app.services.WorkService;
+import com.development.springboot_app.util.FileUploadUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -58,33 +62,34 @@ public class AdminController {
     public String addNew(Model model, Work work,
         @RequestParam("imagesFile") List<MultipartFile> imagesFile) {
 
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-            // ADMINとしてログインしてる場合、作品投稿フォームに入力された情報をDBに保存する
-            // 画像ファイルを/static/image/以下に保存する
-            if (!(authentication instanceof AnonymousAuthenticationToken)) {
-
-                List<Images> images = new ArrayList<>();
-
-                for (MultipartFile file : imagesFile) {
-
-                    String imageName = "";
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // ADMINとしてログインしてる場合、作品投稿フォームに入力された情報をDBに保存する
+        // 画像ファイルを/static/image/以下に保存する
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            List<Images> images = new ArrayList<>();
+            Optional<Work> latestWork = workService.getLatestOne();
+            Integer latestWorkId = latestWork.get().getId();
+            for (MultipartFile file : imagesFile) {
+                String imageName = "";
+                try {
+                    String uploadDir = "springboot-app/src/main/resources/static/image/works/" + latestWorkId;
                     if (!Objects.equals(file.getOriginalFilename(), "")) {
                         imageName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
                         images.add(new Images(imageName));
+                        FileUploadUtil.saveFile(uploadDir, imageName, file);
                     }
                 }
-
-                work.setImages(images);
-
-                for (Images image : work.getImages()) {
-                    image.setWork(work);
+                catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
-
-                // 新規作品をDBに追加する
-                workService.addNew(work);
             }
+            work.setImages(images);
+            for (Images image : work.getImages()) {
+                image.setWork(work);
+            }
+            // 新規作品をDBに追加する
+            workService.addNew(work);
+        }
 
         return "index";
     }
@@ -103,6 +108,23 @@ public class AdminController {
         }
 
         return "/admin/orders";
+    }
+
+    @GetMapping("/check-orders/{id}")
+    public String checkDetail(Model model,
+    @PathVariable("id") Integer id) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+            List<Work> works = new ArrayList<>();
+            works = workService.findByOrderId(id);
+    
+            model.addAttribute("works", works);
+        }
+
+        return "/admin/order-details";
     }
     
 }

@@ -1,6 +1,7 @@
 package com.development.springboot_app.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -16,15 +17,15 @@ public class WorkService {
         this.workRepository = workRepository;
     }
 
-    public List<Work> getAll() {
-        return workRepository.findAll();
-    }
-
-    public Work getOne(int id) {
-        return workRepository.findById(id).orElseThrow(()->new RuntimeException("id=" + id + "の作品は存在しません。"));
+    public List<Work> findByOrderId(Integer orderId) {
+        return workRepository.findByOrderId(orderId);
     }
 
     public void addNew(Work work) {
         workRepository.save(work);
+    }
+
+    public Optional<Work> getLatestOne() {
+        return workRepository.findOneOrderByIdDesc();
     }
 }

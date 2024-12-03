@@ -24,7 +24,7 @@ public class ContactService {
     public void getMessege(String subject, String text) {
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            public void prepare(MimeMessage mimeMessage) throws Exception {
+            public void prepare(@SuppressWarnings("null") MimeMessage mimeMessage) throws Exception {
                 mimeMessage.setRecipient(Message.RecipientType.TO, 
                 new InternetAddress("tanaka.works2024@gmail.com"));
                 mimeMessage.setFrom(new InternetAddress("tanaka.works2024@gmail.com", "お客様からの問い合わせ", "UTF-8"));
@@ -45,7 +45,7 @@ public class ContactService {
     public void sendMessege(String toEmail, String text) {
 
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            public void prepare(MimeMessage mimeMessage) throws Exception {
+            public void prepare(@SuppressWarnings("null") MimeMessage mimeMessage) throws Exception {
                 mimeMessage.setRecipient(Message.RecipientType.TO, 
                 new InternetAddress(toEmail));
                 mimeMessage.setFrom(new InternetAddress("tanaka.works2024@gmail.com", "田中商店", "UTF-8"));

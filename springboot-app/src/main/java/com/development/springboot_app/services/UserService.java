@@ -21,7 +21,4 @@ public class UserService {
         return userRepository.findByEmail(currentUsername).orElseThrow(() -> new UsernameNotFoundException("ユーザが存在しません。"));
     }
 
-    public User getOne(int id) {
-        return userRepository.findById(id).orElseThrow(()->new RuntimeException("id=" + id + "のユーザは存在しません。"));
-    }
 }
