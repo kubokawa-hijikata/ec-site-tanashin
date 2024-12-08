@@ -20,8 +20,30 @@
                 <a href="/admin/check-orders">購入情報</a>
             </div>
         </div>
-        <h1 class="fw-bold">田中辰太朗のサイトを構築しましょう。</h1>
-        <div class="fs-3">久保川、土方が開発します。</div>
+        <h1 class="fw-bold mt-5 pb-1 text-center">田中工房</h1>
+        <div class="container">
+            <div class="row row-cols-2 row-cols-md-3 work-container">
+                <div class="col mt-4" th:each="work : ${works}">
+                    <div class="d-flex justify-content-center p-2" style="background-color: rgb(254, 247, 236);">
+                        <div class="work-detail">
+                            <a class="text-dark text-decoration-none" th:href="@{/works/{workId}(workId=${work.id})}">
+                                <div th:if="${work.order}" class="d-flex justify-content-center position-relative">
+                                    <img class="object-fit-contain work-image ordered-image" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+                                    <h5 class="ordered">SOLD OUT</h5>
+                                </div>
+                                <div th:unless="${work.order}" class="d-flex justify-content-center">
+                                    <img class="object-fit-contain work-image" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+                                </div>
+                                <div class="mt-2 ps-1">
+                                    <h6 class="fw-bold" th:text="${work.name}"></h6>
+                                    ¥<span th:text="${work.price}"></span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

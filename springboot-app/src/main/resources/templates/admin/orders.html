@@ -14,40 +14,31 @@
     <main>
         <div>
             <div>お客さんが注文した際、注文番号を乱数で生み出す。</div>
-            <div>このテーブルの注文番号を押下して、お客さんが購入した商品を確認できるようにする。</div>
-            <div>発送手続きは「完」「未」のどちらかを表示し、対応状況を確認できるようにする。</div>
         </div>
         <div sec:authorize="hasAuthority('ADMIN')">
             <table>
                 <tr>
                     <th>注文日時</th>
                     <th>注文番号(注文詳細)</th>
-                    <th>顧客名</th>
-                    <th>Eメール</th>
-                    <th>住所</th>
                     <th>決済方法</th>
                     <th>発送手続き</th>
                 </tr>
                 <tr th:each="order : ${orders}">
-                    <td th:text="${order.date}"></td>
-                    <td>
-                        <a th:href="@{/admin/check-orders/{id}(id=${order.id})}" th:text="${order.orderNumber}"></a>
-                    </td>
-                    <td th:text="${order.customer.name}"></td>
-                    <td th:text="${order.customer.email}"></td>
-                    <td>
-                        〒<span th:text="${order.customer.postalCode}"></span>
-                        <span th:text="${order.customer.prefecture}"></span>
-                        <span th:text="${order.customer.city}"></span>
-                        <span th:text="${order.customer.address}"></span>
-                        <span th:text="${order.customer.building}"></span>
-                    </td>
-                    <td th:text="${order.payMethod}"></td>
                     <th:block th:if="${order.ship}">
+                        <td th:text="${order.date}"></td>
+                        <td>
+                            <a th:href="@{/admin/check-orders/{orderNumber}(orderNumber=${order.orderNumber})}" th:text="${order.orderNumber}"></a>
+                        </td>
+                        <td th:text="${order.payMethod}"></td>
                         <td>完</td>
                     </th:block>
                     <th:block th:unless="${order.ship}">
-                        <td>未</td>
+                        <td class="text-danger" th:text="${order.date}"></td>
+                        <td>
+                            <a th:href="@{/admin/check-orders/{orderNumber}(orderNumber=${order.orderNumber})}" th:text="${order.orderNumber}"></a>
+                        </td>
+                        <td class="text-danger" th:text="${order.payMethod}"></td>
+                        <td class="text-danger">未</td>
                     </th:block>
                 </tr>
             </table>

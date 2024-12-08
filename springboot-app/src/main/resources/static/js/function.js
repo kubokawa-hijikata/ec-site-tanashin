@@ -1,11 +1,18 @@
 // 問い合わせ内容を送信時、二重送信防止。
 // 送信ボタンを非活性にする。
 $(function() {
-    $("#submit-button").on('click', function() {
-       $(this).prop('disabled', true);
-       $("#contact-form").submit();
-    });
+  $("#contact-button").on('click', function() {
+    $(this).prop('disabled', true);
+    $("#contact-form").submit();
   });
+});
+
+$(function() {
+  $("#update-button").on('click', function() {
+    $(this).prop('disabled', true);
+    $("#update-form").submit();
+  });
+});
 
 // 各htmlにheader.hmtlとfooter.htmlを挿入する。
 fetch("/html/header.html")

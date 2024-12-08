@@ -58,6 +58,7 @@ public class AdminController {
         return "/admin/post-work";
     }
 
+    // 新しい作品をDBに保存する
     @PostMapping("/post-work/addNew")
     public String addNew(Model model, Work work,
         @RequestParam("imagesFile") List<MultipartFile> imagesFile) {
@@ -69,10 +70,12 @@ public class AdminController {
             List<Images> images = new ArrayList<>();
             Optional<Work> latestWork = workService.getLatestOne();
             Integer latestWorkId = latestWork.get().getId();
+            Integer storeWorkId = latestWorkId + 1;
+            
             for (MultipartFile file : imagesFile) {
                 String imageName = "";
                 try {
-                    String uploadDir = "springboot-app/src/main/resources/static/image/works/" + latestWorkId;
+                    String uploadDir = "springboot-app/src/main/resources/static/image/works/" + storeWorkId;
                     if (!Objects.equals(file.getOriginalFilename(), "")) {
                         imageName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
                         images.add(new Images(imageName));
@@ -91,9 +94,10 @@ public class AdminController {
             workService.addNew(work);
         }
 
-        return "index";
+        return "redirect:/";
     }
 
+    // 購入情報画面へ
     @GetMapping("/check-orders")
     public String checkOrders(Model model) {
 
@@ -110,21 +114,43 @@ public class AdminController {
         return "/admin/orders";
     }
 
-    @GetMapping("/check-orders/{id}")
+    // 注文詳細画面へ
+    @GetMapping("/check-orders/{orderNumber}")
     public String checkDetail(Model model,
-    @PathVariable("id") Integer id) {
+    @PathVariable("orderNumber") int orderNumber) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
 
-            List<Work> works = new ArrayList<>();
-            works = workService.findByOrderId(id);
+            Orders order = ordersService.findByOrderNumber(orderNumber);
+            List<Work> works = order.getWorks();
     
+            model.addAttribute("order", order);
             model.addAttribute("works", works);
         }
 
         return "/admin/order-details";
+    }
+
+    // 発送手続き状況を更新する
+    @PostMapping("/update/{orderNumber}")
+    public String update(Model model,
+    @PathVariable("orderNumber") int orderNumber,
+    @RequestParam("ship") boolean ship) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+            Orders order = ordersService.findByOrderNumber(orderNumber);
+            order.setShip(ship);
+
+            ordersService.addNew(order);
+        }
+
+        return "redirect:/admin/check-orders";
+
     }
     
 }

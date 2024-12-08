@@ -46,6 +46,7 @@
 /* navbarで{main}タグの上部分が隠れてしまうので50px分ずらす */
 body {
     padding-top: 50px;
+    padding-right: 0.5rem;
 }
 
 /* navbar内のプライバシーポリシー/特定商取引法に基づく表記について */
@@ -70,6 +71,15 @@ body {
     .nav-container-margin {
         margin-right: 0px;
     }
+    .work-container {
+        padding: 0 5%;
+    }
+    .work-image {
+        max-height: 525px;
+        max-width: 350px;
+        width: 100%;
+        height: 100%;
+    }
   }
 
 @media (max-width: 768px) {
@@ -78,6 +88,10 @@ body {
     }
     .nav-container-margin {
         margin-left: 0px;
+    }
+    .work-image {
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -97,4 +111,15 @@ table td {
     padding-bottom: 0.5rem !important;
     padding-right: 0.5rem !important;
     padding-left: 0.5rem !important;
+}
+
+.ordered-image {
+    opacity: 0.5;
+}
+
+.ordered {
+    position: absolute;/*重ねたい子要素にabsolute*/
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);/*センター寄せの修正*/
 }
