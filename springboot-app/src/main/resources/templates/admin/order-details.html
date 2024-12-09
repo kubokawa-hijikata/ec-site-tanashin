@@ -45,7 +45,7 @@
                     <table>
                         <tr>
                             <th>注文日時</th>
-                            <th>顧客名</th>
+                            <th>名前</th>
                             <th>Eメール</th>
                             <th>住所</th>
                             <th>決済方法</th>
@@ -53,7 +53,10 @@
                         </tr>
                         <tr>
                             <td th:text="${order.date}"></td>
-                            <td th:text="${order.customer.name}"></td>
+                            <td>
+                                <span th:text="${order.customer.lastName}"></span>
+                                 <span th:text="${order.customer.firstName}"></span>
+                            </td>
                             <td th:text="${order.customer.email}"></td>
                             <td>
                                 〒<span th:text="${order.customer.postalCode}"></span>
