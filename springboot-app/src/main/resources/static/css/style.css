@@ -71,14 +71,17 @@ body {
     .nav-container-margin {
         margin-right: 0px;
     }
-    .work-container {
-        padding: 0 5%;
+    .work-width {
+        max-width: 1200px;
     }
     .work-image {
         max-height: 525px;
         max-width: 350px;
         width: 100%;
         height: 100%;
+    }
+    .work-page-width {
+        max-width: 1050px;
     }
   }
 

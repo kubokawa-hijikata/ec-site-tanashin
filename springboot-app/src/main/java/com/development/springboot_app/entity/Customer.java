@@ -21,7 +21,11 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "first_name")
+    private String firstName;
 
     @Column(unique = true)
     private String email;
@@ -45,9 +49,10 @@ public class Customer {
 
     }
 
-    public Customer(Integer id, String name, String email, String prefecture, String city, String address, String building, String postalCode, List<Orders> orders) {
+    public Customer(Integer id, String lastName, String firstName, String email, String prefecture, String city, String address, String building, String postalCode, List<Orders> orders) {
         this.id = id;
-        this.name = name;
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.email = email;
         this.prefecture = prefecture;
         this.city = city;
@@ -65,12 +70,20 @@ public class Customer {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
@@ -133,7 +146,8 @@ public class Customer {
     public java.lang.String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +
                 ", prefecture='" + prefecture + '\'' +
                 ", city='" + city + '\'' +

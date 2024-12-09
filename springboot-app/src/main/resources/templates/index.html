@@ -20,12 +20,11 @@
                 <a href="/admin/check-orders">購入情報</a>
             </div>
         </div>
-        <h1 class="fw-bold mt-5 pb-1 text-center">田中工房</h1>
-        <div class="container">
-            <div class="row row-cols-2 row-cols-md-3 work-container">
+        <div class="container work-width">
+            <div class="row row-cols-2 row-cols-md-3">
                 <div class="col mt-4" th:each="work : ${works}">
                     <div class="d-flex justify-content-center p-2" style="background-color: rgb(254, 247, 236);">
-                        <div class="work-detail">
+                        <div>
                             <a class="text-dark text-decoration-none" th:href="@{/works/{workId}(workId=${work.id})}">
                                 <div th:if="${work.order}" class="d-flex justify-content-center position-relative">
                                     <img class="object-fit-contain work-image ordered-image" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">

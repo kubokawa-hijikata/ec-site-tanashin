@@ -13,23 +13,24 @@
 <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
-        <h1 class="fw-bold">お問い合わせはこちらから。</h1>
-
-        <form id="contact-form" th:action="@{/contact}"  method="post">
-            <dl>
-                <dt><label for="name">お名前</label></dt>
-                <dd><input type="text" th:name="name" /></dd>
-                <dt><label for="phoneNumber">電話番号</label></dt>
-                <dd><input type="text" th:name="phoneNumber" /></dd>
-                <dt><label for="email">メールアドレス</label></dt>
-                <dd><input type="text" th:name="email" /></dd>
-                <dt><label for="subject">件名</label></dt>
-                <dd><input type="text" th:name="subject" /></dd>
-                <dt><label for="content">お問い合わせ内容</label></dt>
-                <dd><textarea name="content" cols="30" rows="5"></textarea></dd>
-              </dl>
-              <button type="submit" id="contact-button">送信</button>
-        </form>
+        <div>
+            <h1 class="fw-bold">お問い合わせはこちらから。</h1>
+            <form id="contact-form" th:action="@{/contact}"  method="post">
+                <dl>
+                    <dt><label for="name">お名前</label></dt>
+                    <dd><input type="text" th:name="name" /></dd>
+                    <dt><label for="phoneNumber">電話番号</label></dt>
+                    <dd><input type="text" th:name="phoneNumber" /></dd>
+                    <dt><label for="email">メールアドレス</label></dt>
+                    <dd><input type="text" th:name="email" /></dd>
+                    <dt><label for="subject">件名</label></dt>
+                    <dd><input type="text" th:name="subject" /></dd>
+                    <dt><label for="content">お問い合わせ内容</label></dt>
+                    <dd><textarea name="content" cols="30" rows="5"></textarea></dd>
+                  </dl>
+                  <button type="submit" id="contact-button">送信</button>
+            </form>
+        </div>
     </main>
 <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
