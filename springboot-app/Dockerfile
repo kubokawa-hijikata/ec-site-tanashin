@@ -5,11 +5,8 @@ FROM maven:3.8.8-eclipse-temurin-21 AS build
 WORKDIR /app  
 
 # Copy Maven's configuration and install dependencies 
-COPY pom.xml . 
-RUN mvn dependency:go-offline 
-
-# Copy the rest of the application source code 
-COPY src ./src 
+COPY pom.xml /app/
+COPY src /app/src
 
 # Build the application (creates a JAR file in the /target directory) 
 RUN mvn clean package -DskipTests 
@@ -21,10 +18,10 @@ FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /app 
 
 # Copy the JAR file from the previous stage 
-COPY --from=build /app/target/*.jar app.jar 
+COPY --from=build /app/target/*.jar /app/app.jar 
 
 # Expose the port that the app runs on 
 EXPOSE 8080 
 
 # Run the Spring Boot application 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dspring.config.location=file:/app/config/application.properties","-jar", "/app/app.jar"]

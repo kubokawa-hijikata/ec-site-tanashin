@@ -22,10 +22,14 @@ services:
     build:
       context: ./springboot-app # Path to the directory containing the Dockerfile
       dockerfile: Dockerfile # Specify the Dockerfile name if not default
+    ports:
+      - "8080:8080"
     depends_on:
       - mysql
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME_FILE: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD_FILE: ${MYSQL_PASSWORD}
-      
+    volumes:
+      - ./springboot-app/src/main/resources/application.properties:/app/config/application.properties
+      - ./springboot-app/src/main/resources/static/image/works:/app/external/image/works

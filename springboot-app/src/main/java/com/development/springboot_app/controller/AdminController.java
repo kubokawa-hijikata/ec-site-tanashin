@@ -55,7 +55,7 @@ public class AdminController {
     
             model.addAttribute("work", work);
         }
-        return "/admin/post-work";
+        return "admin/post-work";
     }
 
     // 新しい作品をDBに保存する
@@ -74,16 +74,20 @@ public class AdminController {
             
             for (MultipartFile file : imagesFile) {
                 String imageName = "";
+                String uploadDir = "/app/external/image/works/" + storeWorkId;
                 try {
-                    String uploadDir = "springboot-app/src/main/resources/static/image/works/" + storeWorkId;
                     if (!Objects.equals(file.getOriginalFilename(), "")) {
                         imageName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
                         images.add(new Images(imageName));
+
+                        // File dest = new File(uploadDir + "/" + file.getOriginalFilename());
+                        // file.transferTo(dest);
+
                         FileUploadUtil.saveFile(uploadDir, imageName, file);
                     }
                 }
                 catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    throw new RuntimeException(ex.getMessage());
                 }
             }
             work.setImages(images);
@@ -92,8 +96,8 @@ public class AdminController {
             }
             // 新規作品をDBに追加する
             workService.addNew(work);
-        }
 
+        }
         return "redirect:/";
     }
 
@@ -111,7 +115,7 @@ public class AdminController {
             model.addAttribute("orders", orders);
         }
 
-        return "/admin/orders";
+        return "admin/orders";
     }
 
     // 注文詳細画面へ
@@ -130,7 +134,7 @@ public class AdminController {
             model.addAttribute("works", works);
         }
 
-        return "/admin/order-details";
+        return "admin/order-details";
     }
 
     // 発送手続き状況を更新する

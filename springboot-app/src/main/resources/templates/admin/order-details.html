@@ -27,7 +27,7 @@
                         <td th:text="${work.name}"></td>
                         <td th:text="${work.price}"></td>
                         <td>
-                            <img height="100px" class="object-fit-cover" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="作品イメージ" />
+                            <img height="100px" class="object-fit-cover" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="作品イメージ" />
                         </td>
                     </tr>
                 </table>

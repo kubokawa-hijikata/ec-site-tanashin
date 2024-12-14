@@ -27,11 +27,11 @@
                         <div>
                             <a class="text-dark text-decoration-none" th:href="@{/works/{workId}(workId=${work.id})}">
                                 <div th:if="${work.order}" class="d-flex justify-content-center position-relative">
-                                    <img class="object-fit-contain work-image ordered-image" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+                                    <img class="object-fit-contain work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
                                     <h5 class="ordered">SOLD OUT</h5>
                                 </div>
                                 <div th:unless="${work.order}" class="d-flex justify-content-center">
-                                    <img class="object-fit-contain work-image" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+                                    <img class="object-fit-contain work-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
                                 </div>
                                 <div class="mt-2 ps-1">
                                     <h6 class="fw-bold" th:text="${work.name}"></h6>
