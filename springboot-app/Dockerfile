@@ -21,7 +21,8 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar /app/app.jar 
 
 # Expose the port that the app runs on 
-EXPOSE 8080 
+EXPOSE 8080
+EXPOSE 5005
 
 # Run the Spring Boot application 
-ENTRYPOINT ["java", "-Dspring.config.location=file:/app/config/application.properties","-jar", "/app/app.jar"]
+ENTRYPOINT ["java","-Dspring.config.location=file:/app/config/application.properties","-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005","-jar","/app/app.jar"]

@@ -1,8 +1,9 @@
 package com.development.springboot_app.controller;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,32 +18,52 @@ import com.development.springboot_app.entity.Orders;
 import com.development.springboot_app.entity.Work;
 import com.development.springboot_app.services.CustomerService;
 import com.development.springboot_app.services.OrdersService;
+import com.development.springboot_app.services.SessionService;
 import com.development.springboot_app.services.WorkService;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/orders")
 public class OrdersController {
 
-    private final OrdersService ordersService;
     private final CustomerService customerService;
     private final WorkService workService;
+    private final SessionService sessionService;
 
     @Autowired
-    public OrdersController(OrdersService ordersService, CustomerService customerService, WorkService workService) {
-        this.ordersService = ordersService;
+    public OrdersController(CustomerService customerService, WorkService workService, SessionService sessionService) {
         this.customerService = customerService;
         this.workService = workService;
+        this.sessionService = sessionService;
     }
 
     @GetMapping("/{workId}")
     public String workOrder(Model model,
-    @PathVariable("workId") int workId) {
+    @PathVariable("workId") int workId,
+    HttpServletRequest request, HttpServletResponse response) {
 
         Customer customer = new Customer();
+        int cartSize = sessionService.getCartSize(request, response);
+        
+        model.addAttribute("cartSize", cartSize);
         model.addAttribute("customer", customer);
         model.addAttribute("workId", workId);
 
         return "order";
+    }
+
+    @GetMapping("/add/{workId}")
+    public String workCartAdd(Model model,
+    @PathVariable("workId") int workId,
+    HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        sessionService.addCart(workId, request, response);
+
+        return "redirect:/";
     }
 
     @PostMapping("/{workId}")
@@ -63,7 +84,8 @@ public class OrdersController {
 
         customerService.addNew(customer);
 
-        return "/";
+        // 商品購入完了場面を表示したい
+        return "redirect:/";
     }
     
 }

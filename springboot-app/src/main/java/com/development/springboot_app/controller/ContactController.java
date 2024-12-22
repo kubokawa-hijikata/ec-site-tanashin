@@ -8,21 +8,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.development.springboot_app.services.ContactService;
+import com.development.springboot_app.services.SessionService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class ContactController {
 
     // お問い合わせ内容を送信するための処理を行うクラス
     private final ContactService contactService;
+    private final SessionService sessionService;
 
     @Autowired
-    public ContactController(ContactService contactService) {
+    public ContactController(ContactService contactService, SessionService sessionService) {
         this.contactService = contactService;
+        this.sessionService = sessionService;
     }
 
     // 「contact」画面へ遷移
     @GetMapping("/contact")
-    public String contact() {
+    public String contact(Model model,
+        HttpServletRequest request, HttpServletResponse response) {
+
+        int cartSize = sessionService.getCartSize(request, response);
+        model.addAttribute("cartSize", cartSize);
+
         return "contact";
     }
 

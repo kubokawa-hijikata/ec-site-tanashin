@@ -15,12 +15,12 @@ $(function() {
 });
 
 // 各htmlにheader.hmtlとfooter.htmlを挿入する。
-fetch("/html/header.html")
-.then((response) => response.text())
-.then((data) => document.querySelector("body").insertAdjacentHTML('afterbegin', data));
-fetch("/html/footer.html")
-.then((response) => response.text())
-.then((data) => document.querySelector("main").insertAdjacentHTML('afterend', data));
+// fetch("/html/header.html")
+// .then((response) => response.text())
+// .then((data) => document.querySelector("body").insertAdjacentHTML('afterbegin', data));
+// fetch("/html/footer.html")
+// .then((response) => response.text())
+// .then((data) => document.querySelector("main").insertAdjacentHTML('afterend', data));
 
 // 「イメージを追加する」ボタンを押下時に
 // さらに外部ファイルを読み取れるようにする

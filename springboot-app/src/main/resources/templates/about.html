@@ -10,13 +10,15 @@
     <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
 </head>
 <body>
-<!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
+    <div th:replace="common/header :: headerFlagment"></div>
+    <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
         <h1 class="fw-bold">田中辰太朗です。</h1>
 
     </main>
-<!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
+    <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
+    <div th:replace="common/footer :: footerFlagment"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <script src="/js/function.js"></script>
