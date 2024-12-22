@@ -47,7 +47,7 @@
                         <span class="text-danger text-decoration-none">※既に売り切れの商品です</span>
                     </div>
                     <div th:unless="${work.order}">
-                        <a th:href="@{/orders/{workId}(workId=${work.id})}">
+                        <a class="text-decoration-none" th:href="@{/orders/{workId}(workId=${work.id})}">
                             <button>今すぐ購入</button>
                         </a>
 
