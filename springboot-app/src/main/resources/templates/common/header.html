@@ -38,10 +38,12 @@
           </div>
       </div>
       <div class="cart-container d-flex">
-          <a class="text-dark" href="#">
-              <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+        <a class="text-dark" th:href="@{/orders}">
+          <button class="border-0 bg-light">
+            <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+            <span th:if="${cartSize} ne 0" class="cart-number d-flex justify-content-center align-items-center" th:text="${cartSize}"></span>
           </a>
-          <span th:if="${cartSize} ne 0" class="cart-number d-flex justify-content-center align-items-center" th:text="${cartSize}"></span>
+        </form>
       </div>
     </nav>
     <h1 class="fw-bold mt-4 text-center">田中工房</h1>

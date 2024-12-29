@@ -3,6 +3,7 @@ package com.development.springboot_app.controller;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.development.springboot_app.entity.Customer;
+import com.development.springboot_app.entity.Images;
 import com.development.springboot_app.entity.Orders;
 import com.development.springboot_app.entity.Work;
 import com.development.springboot_app.services.CustomerService;
-import com.development.springboot_app.services.OrdersService;
 import com.development.springboot_app.services.SessionService;
 import com.development.springboot_app.services.WorkService;
 
@@ -41,20 +42,35 @@ public class OrdersController {
         this.sessionService = sessionService;
     }
 
-    @GetMapping("/{workId}")
-    public String workOrder(Model model,
-    @PathVariable("workId") int workId,
+    @GetMapping("")
+    public String order(Model model,
     HttpServletRequest request, HttpServletResponse response) {
 
         Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+        
+        boolean cart = false;
+        int totalPrice = 0;
+        HttpSession session = request.getSession();
+        ArrayList<Work> cartList = (ArrayList<Work>)session.getAttribute("cartList");
         int cartSize = sessionService.getCartSize(request, response);
         
-        model.addAttribute("cartSize", cartSize);
-        model.addAttribute("customer", customer);
-        model.addAttribute("workId", workId);
+        if (Objects.nonNull(cartList)) {
+            for (Work work : cartList) {
+                List<Images> images = workService.getOne(work.getId()).getImages();
+                work.setImages(images);
+                totalPrice += work.getPrice();
+                cart = true;
+            }
+        }
 
+        model.addAttribute("cartSize", cartSize);
+        model.addAttribute("cart", cart);
+        model.addAttribute("cartList", cartList);
+        model.addAttribute("totalPrice", totalPrice);
+        
         return "order";
-    }
+    } 
 
     @GetMapping("/add/{workId}")
     public String workCartAdd(Model model,
@@ -86,6 +102,27 @@ public class OrdersController {
 
         // 商品購入完了場面を表示したい
         return "redirect:/";
+    }
+
+    @PostMapping("/delete/{workId}")
+    public String deleteWork(Model model,
+    @PathVariable("workId") int workId,
+    HttpServletRequest request, HttpServletResponse response) {
+        
+        HttpSession session = request.getSession();
+        ArrayList<Work> cartList = (ArrayList<Work>)session.getAttribute("cartList");
+
+        int index = 0;
+        for (Work work : cartList) {
+            if (work.getId().equals(workId)) {
+                cartList.remove(index);
+                break;
+            } else {
+                index += 1;
+            }
+        }
+
+        return "redirect:/orders";
     }
     
 }
