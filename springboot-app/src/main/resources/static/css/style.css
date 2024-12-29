@@ -81,6 +81,12 @@ body {
         height: 20vw;
         object-fit: cover;
     }
+    .order-col > * {
+        flex: 0 0 auto;
+    }
+    .cart-margin {
+        margin-left: 1.5rem !important;
+    }
   }
 
 @media (max-width: 768px) {
@@ -95,6 +101,14 @@ body {
         width: 100%;
         height: 40vh;
         object-fit: cover;
+    }
+    .order-col {
+        display: flex;
+        flex-direction: column-reverse !important;
+    }
+    .order-col > * {
+        flex: 0 0 auto;
+        width: 100%;
     }
 }
 
@@ -129,11 +143,51 @@ table td {
 
 .cart-number {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 13px;
+    right: 16px;
     background-color: rgb(255, 100, 100);
     color: white;
     height: 20px;
     width: 20px;
     border-radius: 50%;
+}
+
+.font-small {
+    font-size: small;
+}
+
+.form-area {
+    width: 48%;
+}
+
+.popup-wrapper {
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  
+.popup-inside {
+  text-align: center;
+  width: 100%;
+  height: 150px;
+  max-width: 300px;
+  background: white;
+  margin: 300px auto;
+  padding: 25px 20px;
+  position: relative;
+}
+
+.cancel-button, .delete-button {
+  background: purple;
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+}
+
+.cart-0-order {
+    width: 250px;
 }

@@ -43,18 +43,22 @@
                         </p>
                     </div>
                     <div th:if="${work.order}">
-                        <button disabled>今すぐ購入</button>
+                        <button disabled>カートに入れる</button>
                         <span class="text-danger text-decoration-none">※既に売り切れの商品です</span>
                     </div>
-                    <div th:unless="${work.order}">
-                        <a class="text-decoration-none" th:href="@{/orders/{workId}(workId=${work.id})}">
-                            <button>今すぐ購入</button>
-                        </a>
+                    <div th:unless="${work.order}" class="d-flex">
 
-                        <a th:if="${cartFlag}" class="ms-2">
-                            <button disabled>既にカートに入っている商品です</button>
-                        </a>
+                        <!-- <form th:action="@{/orders}" method="post">
+                            <input th:name="id" value="true" hidden />
+                            <input th:name="workId" th:value="${work.id}" hidden />
+                            <input th:name="cart" value="false" hidden />
+                            <button type="submit">今すぐ購入</button>
+                        </form> -->
 
+                        <div th:if="${cartFlag}" class="ms-2">
+                            <button disabled>カートに入れる</button>
+                            <span class="text-danger text-decoration-none">※既にカートに入っている商品です</span>
+                        </div>
                         <a th:unless="${cartFlag}" th:href="@{/orders/add/{workId}(workId=${work.id})}" class="ms-2">
                             <button>カートに入れる</button>
                         </a>

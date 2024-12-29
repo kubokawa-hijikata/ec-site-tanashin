@@ -3,7 +3,7 @@
 $(function() {
   $("#contact-button").on('click', function() {
     $(this).prop('disabled', true);
-    $("#contact-form").submit();
+    $("#contactForm").submit();
   });
 });
 
@@ -46,3 +46,40 @@ $(document).on("click", "#addImage", function (e) {
     .append(newRow);
 
 });
+
+// 郵便番号から住所を表示
+var formElements = document.forms.orderForm;
+$(function() {
+  $("#searchAddress").on('click', function() {
+    const postalCode = document.getElementById("postalCode").value;
+    $.getJSON(`https://jp-postal-code-api.ttskch.com/api/v1/${postalCode}.json`, (data) => {
+      formElements.prefecture.value = data["addresses"][0]["ja"]["prefecture"];
+      formElements.city.value = data["addresses"][0]["ja"]["address1"];
+      formElements.address.value = data["addresses"][0]["ja"]["address2"];
+    });
+  });
+});
+
+// // カートの中身を削除する
+// const clickBtn = document.getElementById('deleteCart');
+// const popupWrapper = document.getElementById('popup-wrapper');
+// const close = document.getElementById('close');
+// // ボタンをクリックしたときにポップアップを表示させる
+// clickBtn.addEventListener('click', () => {
+//   popupWrapper.style.display = "block";
+// });
+
+// // ポップアップの外側又は「x」のマークをクリックしたときポップアップを閉じる
+// popupWrapper.addEventListener('click', e => {
+//   if (e.target.id === popupWrapper.id || e.target.id === close.id) {
+//     popupWrapper.style.display = 'none';
+//   }
+// });
+
+// ポップアップ画面の表示、非表示
+function deleteCart(num) {
+  $('.popup-wrapper' + num).show();
+}
+function popupClose(e) {
+  $('.popup-wrapper').hide();
+}
