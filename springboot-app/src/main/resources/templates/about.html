@@ -14,8 +14,25 @@
     <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
-        <h1 class="fw-bold">田中辰太朗です。</h1>
-
+        <div class="container contact-width mt-5 rounded d-flex justify-content-center" style="background-color: #F4F3EF;">
+            <div class="col-9">
+                <h6 class="pt-4 fw-bold d-flex justify-content-center">私について</h6>
+                <hr />
+                <div class="d-flex mb-4">
+                    <div class="col-4 d-flex justify-content-center align-items-start px-2">
+                        <img class="object-fit-contain me-3" style="width: 100%; max-width: 200px;" src="/image/profile.jpg" alt="プロフィール画像" />
+                    </div>
+                    <div class="col-8">
+                        <span style="font-size: small;">たなか しんたろう</span>
+                        <h5 class="fw-bold">田中 辰太郎</h5>
+                        1999年10月23日生まれ、神奈川育ち。<br />
+                        鎌倉高等学校を卒業したのち東京藝術大学日本画科に進学。<br />
+                        芸術家である父親の影響もあり、高校時代に芸術の道へ進むことを決意。
+                        こちらのサイトでは練習の一環として描いた絵画や自作した小物を販売しています。
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
     <div th:replace="common/footer :: footerFlagment"></div>

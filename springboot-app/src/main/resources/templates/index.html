@@ -24,7 +24,7 @@
         <div class="container work-width">
             <div class="row row-cols-2 row-cols-md-3">
                 <div class="col mt-4" th:each="work : ${works}">
-                    <div class="d-flex justify-content-center p-2" style="background-color: rgb(254, 247, 236);">
+                    <div class="d-flex justify-content-center p-2" style="background-color: #F4F3EF;">
                         <div>
                             <a class="text-dark text-decoration-none" th:href="@{/works/{workId}(workId=${work.id})}">
                                 <div th:if="${work.order}" class="d-flex justify-content-center position-relative">

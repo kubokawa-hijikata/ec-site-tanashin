@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tanashin</title>
+    <title>購入情報|Tanashin</title>
     <script src="https://kit.fontawesome.com/3c982ecd98.js" crossorigin="anonymous"></script>
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
@@ -17,7 +17,7 @@
         <div th:if="${cart}" class="container mt-5 work-width">
             <div class="row order-col justify-content-center">
                 <div class="col col-md-6">
-                    <form id="orderForm" th:object="${customer}" th:action="@{/orders/{workId}(workId=${workId})}" method="post">
+                    <form id="orderForm" th:object="${customer}" th:action="@{/orders}" method="post">
                         <dl>
                             <dt>
                                 <label for="email" class="fw-normal">メールアドレス
@@ -119,7 +119,7 @@
                                 <span class="col-12 d-flex justify-content-end text-secondary font-small">(例) △△△ハウス◻︎号室</span>
                             </dd>
                         </dl>
-                        <button class="col-12 text-white bg-black fw-bold rounded py-3 px-1 mt-3" type="submit" id="contact-button">入力内容の確認へ</button>
+                        <button class="col-12 text-white bg-black fw-bold rounded py-3 px-1 mt-3" type="submit">入力内容の確認へ</button>
                     </form>
                 </div>
                 <div class="col col-md-5 mb-3 cart-margin">
@@ -135,7 +135,7 @@
                                     <h6 th:text="${work.name}"></h6>
                                     ¥<span th:text="${work.price}"></span>
                                 </div>
-                                <button class="border-0 bg-white d-flex align-items-start " type="button" th:onclick="'deleteCart('+ __${work.id}__ +')'">
+                                <button class="border-0 bg-white d-flex align-items-start " type="button" th:onclick="'deleteCart('+ __${work.id}__ +')'" style="background-color:#F4F3EF;">
                                     <i class="fa-sharp-duotone fa-solid fa-xmark fs-4 text-secondary"></i>
                                 </button>
                                 <div th:class="'popup-wrapper popup-wrapper' + __${work.id}__">

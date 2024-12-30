@@ -1,3 +1,7 @@
+body, .nav-bg {
+    background-color: #FFFFFF;
+}
+
 /* インスタのロゴを作成 */
 .insta_btn {
     display: inline-block;
@@ -87,6 +91,9 @@ body {
     .cart-margin {
         margin-left: 1.5rem !important;
     }
+    .contact-width {
+        width: 1000px;
+    }
   }
 
 @media (max-width: 768px) {
@@ -109,6 +116,9 @@ body {
     .order-col > * {
         flex: 0 0 auto;
         width: 100%;
+    }
+    .contact-width {
+        width: 95%;
     }
 }
 

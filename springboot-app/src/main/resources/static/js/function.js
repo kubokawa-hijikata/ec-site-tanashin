@@ -3,7 +3,7 @@
 $(function() {
   $("#contact-button").on('click', function() {
     $(this).prop('disabled', true);
-    $("#contactForm").submit();
+    $("#contact-form").submit();
   });
 });
 

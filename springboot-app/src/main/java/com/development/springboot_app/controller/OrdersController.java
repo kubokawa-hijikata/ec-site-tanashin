@@ -19,6 +19,7 @@ import com.development.springboot_app.entity.Images;
 import com.development.springboot_app.entity.Orders;
 import com.development.springboot_app.entity.Work;
 import com.development.springboot_app.services.CustomerService;
+import com.development.springboot_app.services.OrdersService;
 import com.development.springboot_app.services.SessionService;
 import com.development.springboot_app.services.WorkService;
 
@@ -33,12 +34,14 @@ public class OrdersController {
 
     private final CustomerService customerService;
     private final WorkService workService;
+    private final OrdersService ordersService;
     private final SessionService sessionService;
 
     @Autowired
-    public OrdersController(CustomerService customerService, WorkService workService, SessionService sessionService) {
+    public OrdersController(CustomerService customerService, WorkService workService, OrdersService ordersService, SessionService sessionService) {
         this.customerService = customerService;
         this.workService = workService;
+        this.ordersService = ordersService;
         this.sessionService = sessionService;
     }
 
@@ -79,26 +82,35 @@ public class OrdersController {
 
         sessionService.addCart(workId, request, response);
 
-        return "redirect:/";
+        return "redirect:/orders";
     }
 
-    @PostMapping("/{workId}")
+    @PostMapping("")
     public String addCustomerInfo(Model model, Customer customer,
-    @PathVariable("workId") int workId) {
+    HttpServletRequest request, HttpServletResponse response) {
 
         Orders order = new Orders();
+        HttpSession session = request.getSession();
+        ArrayList<Work> cartList = (ArrayList<Work>)session.getAttribute("cartList");
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        order.setOrderNumber(1234567866);
         order.setDate(timestamp);
-        order.setPayMethod("支払い処理はまた後で実装");
         order.setShip(false);
         order.setCustomer(customer);
+        // 以下二つの処理がまだ
+        order.setOrderNumber(1234567866);
+        order.setPayMethod("支払い処理はまた後で実装");
 
-        Work work = workService.getOne(workId);
-        work.setOrder(order);
+        for (Work work : cartList) {
+            Work updatedWork = workService.getOne(work.getId());
+            updatedWork.setOrder(order);
+        }
 
+        ordersService.addNew(order);
         customerService.addNew(customer);
+
+        // カートの中身を削除する
+        session.removeAttribute("cartList");
 
         // 商品購入完了場面を表示したい
         return "redirect:/";

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tanashin</title>
+    <title th:text="${work.name}+'|Tanashin'"></title>
     <script src="https://kit.fontawesome.com/3c982ecd98.js" crossorigin="anonymous"></script>
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
@@ -15,7 +15,7 @@
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
         <div class="container work-page-width">
-            <div class="row row-cols-1 row-cols-md-2 mt-4 mx-4 pb-4" style="background-color: rgb(254, 247, 236);">
+            <div class="row row-cols-1 row-cols-md-2 mt-4 mx-4 pb-4" style="background-color: #F4F3EF;">
                 <div class="col pt-4">
                     <div th:if="${work.order}" class="d-flex justify-content-center position-relative">
                         <img class="object-fit-contain work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
@@ -43,10 +43,10 @@
                         </p>
                     </div>
                     <div th:if="${work.order}">
-                        <button disabled>カートに入れる</button>
+                        <button class="w-50 fw-bold rounded py-3 px-1 mt-3" disabled>カートに入れる</button>
                         <span class="text-danger text-decoration-none">※既に売り切れの商品です</span>
                     </div>
-                    <div th:unless="${work.order}" class="d-flex">
+                    <div th:unless="${work.order}" class="d-flex col-12">
 
                         <!-- <form th:action="@{/orders}" method="post">
                             <input th:name="id" value="true" hidden />
@@ -56,11 +56,11 @@
                         </form> -->
 
                         <div th:if="${cartFlag}" class="ms-2">
-                            <button disabled>カートに入れる</button>
+                            <button class="w-50 fw-bold rounded py-3 px-1 mt-3" disabled>カートに入れる</button>
                             <span class="text-danger text-decoration-none">※既にカートに入っている商品です</span>
                         </div>
-                        <a th:unless="${cartFlag}" th:href="@{/orders/add/{workId}(workId=${work.id})}" class="ms-2">
-                            <button>カートに入れる</button>
+                        <a th:unless="${cartFlag}" th:href="@{/orders/add/{workId}(workId=${work.id})}" class="col-12 text-decoration-none">
+                            <button class="w-50 text-white bg-black fw-bold rounded py-3 px-1 mt-3">カートに入れる</button>
                         </a>
                     </div>
                 </div>

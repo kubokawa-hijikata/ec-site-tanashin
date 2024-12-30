@@ -2,7 +2,7 @@
 <html lang="ja" xmlns:th="https://www.thymeleaf.org/">
 <body>
   <header th:fragment="headerFlagment" class="mb-2">
-    <nav class="navbar navbar-expand-md bg-body-tertiary fixed-top">
+    <nav class="navbar navbar-expand-md nav-bg fixed-top">
       <div class="container-fluid nav-container-margin">
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
       </div>
       <div class="cart-container d-flex">
         <a class="text-dark" th:href="@{/orders}">
-          <button class="border-0 bg-light">
+          <button class="border-0" style="background-color: #FFFFFF;">
             <i class="fa-sharp fa-solid fa-cart-shopping"></i>
             <span th:if="${cartSize} ne 0" class="cart-number d-flex justify-content-center align-items-center" th:text="${cartSize}"></span>
           </a>
