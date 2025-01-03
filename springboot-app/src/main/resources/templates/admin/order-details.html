@@ -42,7 +42,7 @@
                 </h5>
             </div>
             <div sec:authorize="hasAuthority('ADMIN')">
-                <form id="update-form" th:action="@{/admin/update/{orderNumber}(orderNumber=${order.orderNumber})}"  method="post">
+                <form id="updateForm" th:action="@{/admin/update/{orderNumber}(orderNumber=${order.orderNumber})}"  method="post">
                     <table>
                         <tr>
                             <th>注文日時</th>
@@ -90,7 +90,7 @@
                             </td>
                         </tr>
                     </table>
-                    <button class="mt-2" type="submit" id="update-button">更新する</button>
+                    <button class="mt-2" type="submit" id="updateButton">更新する</button>
                 </form>
             </div>
         </div>

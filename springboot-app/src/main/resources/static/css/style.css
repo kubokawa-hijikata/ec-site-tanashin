@@ -165,6 +165,9 @@ table td {
 .font-small {
     font-size: small;
 }
+.height-small {
+    height: 13px;
+}
 
 .form-area {
     width: 48%;

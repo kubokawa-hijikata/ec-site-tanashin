@@ -16,46 +16,58 @@
         <!-- <main>タグ内を各ページに合わせて変更 -->
         <div th:if="${cart}" class="container mt-5 work-width">
             <div class="row order-col justify-content-center">
-                <div class="col col-md-6">
+                <div class="col col-md-6 pt-4 mb-3 rounded px-3" style="background-color: #F4F3EF;">
                     <form id="orderForm" th:object="${customer}" th:action="@{/orders}" method="post">
                         <dl>
                             <dt>
                                 <label for="email" class="fw-normal">メールアドレス
-                                <span class="text-white bg-warning border rounded ms-3 p-1">必須</span></label>
+                                <span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label>
                             </dt>
                             <dd class="d-flex pt-2">
-                                <input class="py-1 col-12" type="text" th:field="*{email}" placeholder="メールアドレス" />
+                                <input class="py-1 col-12" id="email" type="text" th:field="*{email}" />
                             </dd>
-                            <span class="col-12 d-flex justify-content-end text-secondary font-small">(例) sumple@example.com</span>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-danger font-small mb-2 ms-1 height-small" id="emailMessage"></span>
+                                <span class="text-secondary font-small">(例) sumple@example.com</span>
+                            </div>
 
-                            <dt><label class="fs-5 mb-2">お届け先情報</label></dt>
+                            <dt><label class="fs-5 mt-3 mb-2">お届け先情報</label></dt>
 
                             <dt>
                                 <label for="name" class="fw-normal">お名前
-                                <span class="text-white bg-warning border rounded ms-3 p-1">必須</span></label>
+                                <span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label>
                             </dt>
                             <dd class="pt-2 d-flex justify-content-between">
-                                <input class="py-1 form-area" type="text" th:field="*{lastName}" placeholder="性" />
-                                <input class="py-1 form-area" type="text" th:field="*{firstName}" placeholder="名" />
+                                <input class="py-1 form-area" type="text" id="lastName" th:field="*{lastName}" placeholder="性" />
+                                <input class="py-1 form-area" type="text" id="firstName" th:field="*{firstName}" placeholder="名" />
                             </dd>
                             <div class="d-flex justify-content-between">
-                                <span class="form-area d-flex justify-content-end text-secondary font-small">(例) 田中</span>
-                                <span class="form-area d-flex justify-content-end text-secondary font-small">(例) 太郎</span>
+                                <div class="form-area d-flex justify-content-between">
+                                    <span class="text-danger font-small mb-2 ms-1 height-small" id="lastNameMessage"></span>
+                                    <span class="d-flex justify-content-end text-secondary font-small">(例) 田中</span>
+                                </div>
+                                <div class="form-area d-flex justify-content-between">
+                                    <span class="text-danger font-small mb-2 ms-1 height-small" id="firstNameMessage"></span>
+                                    <span class="d-flex justify-content-end text-secondary font-small">(例) 太郎</span>
+                                </div>
                             </div>
 
                             <dt class="mt-2">
                                 <label for="postalCode" class="fw-normal">郵便番号
-                                <span class="text-white bg-warning border rounded ms-3 p-1">必須</span></label>
+                                <span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label>
                             </dt>
                             <dd class="d-flex pt-2">
-                                <input class="py-1 form-area" type="text" th:field="*{postalCode}" id="postalCode" placeholder="郵便番号" />
+                                <input class="py-1 form-area" type="text" th:field="*{postalCode}" id="postalCode" />
                                 <button type="button" class="ms-3 rounded" id="searchAddress">住所検索</button>
                             </dd>
-                            <span class="form-area d-flex justify-content-end text-secondary font-small">(例) 1000014</span>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-danger font-small mb-2 ms-1 height-small" id="postalCodeMessage"></span>
+                                <span class="form-area d-flex justify-content-end text-secondary font-small">(例) 1000014</span>
+                            </div>
 
                             <dt class="mt-2">
                                 <label for="address" class="fw-normal">住所
-                                <span class="text-white bg-warning border rounded ms-3 p-1">必須</span></label>
+                                <span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label>
                             </dt>
                             <dd class="d-flex pt-2">
                                 <select class="py-2 form-area" th:field="*{prefecture}" id="prefecture" value="" placeholder="都道府県">
@@ -109,20 +121,32 @@
                                     <option value="沖縄県">沖縄県</option>
                                 </select>
                             </dd>
-                            <span class="form-area d-flex justify-content-end text-secondary font-small">(例) 東京都</span>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-danger font-small mb-2 ms-1 height-small" id="prefectureMessage"></span>
+                                <span class="form-area d-flex justify-content-end text-secondary font-small">(例) 東京都</span>
+                            </div>
                             <dd class="mt-2">
                                 <input class="py-1 col-12 mb-2" type="text" th:field="*{city}" id="city" placeholder="市区町村" />
-                                <span class="col-12 d-flex justify-content-end text-secondary font-small">(例) 千代田区</span>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-danger font-small mb-2 ms-1 height-small" id="cityMessage"></span>
+                                    <span class="d-flex justify-content-end text-secondary font-small">(例) 千代田区</span>
+                                </div>
                                 <input class="py-1 col-12 my-2" type="text" th:field="*{address}" id="address" placeholder="丁目・番地・号" />
-                                <span class="col-12 d-flex justify-content-end text-secondary font-small">(例) 永田町○-○-○○</span>
-                                <input class="py-1 col-12 my-2" type="text" th:field="*{building}" placeholder="建物名" />
-                                <span class="col-12 d-flex justify-content-end text-secondary font-small">(例) △△△ハウス◻︎号室</span>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-danger font-small mb-2 ms-1 height-small" id="addressMessage"></span>
+                                    <span class="d-flex justify-content-end text-secondary font-small">(例) 永田町○-○-○○</span>
+                                </div>
+                                <input class="py-1 col-12 my-2" type="text" th:field="*{building}" id="building" placeholder="建物名" />
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-danger font-small mb-2 ms-1 height-small" id="buildingMessage"></span>
+                                    <span class="d-flex justify-content-end text-secondary font-small">(例) △△△ハウス◻︎号室</span>
+                                </div>
                             </dd>
                         </dl>
-                        <button class="col-12 text-white bg-black fw-bold rounded py-3 px-1 mt-3" type="submit">入力内容の確認へ</button>
+                        <button class="col-12 text-white bg-black fw-bold rounded py-3 px-1 my-3" type="submit" id="orderButton">入力内容の確認へ</button>
                     </form>
                 </div>
-                <div class="col col-md-5 mb-3 cart-margin">
+                <div class="col col-md-5 pt-4 mb-3 px-3 cart-margin rounded" style="background-color: #F4F3EF;">
                     <h6 class="fw-bold">カートに入っている商品</h6>
                     <hr />
                     <div th:each="work : ${cartList}">
@@ -135,7 +159,7 @@
                                     <h6 th:text="${work.name}"></h6>
                                     ¥<span th:text="${work.price}"></span>
                                 </div>
-                                <button class="border-0 bg-white d-flex align-items-start " type="button" th:onclick="'deleteCart('+ __${work.id}__ +')'" style="background-color:#F4F3EF;">
+                                <button class="border-0 d-flex align-items-start" type="button" th:onclick="'deleteCart('+ __${work.id}__ +')'" style="background-color:#F4F3EF;">
                                     <i class="fa-sharp-duotone fa-solid fa-xmark fs-4 text-secondary"></i>
                                 </button>
                                 <div th:class="'popup-wrapper popup-wrapper' + __${work.id}__">

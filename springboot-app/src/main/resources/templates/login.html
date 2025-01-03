@@ -19,11 +19,11 @@
 	<form th:action="@{/login}" method="post">
 		<div>
             admin@test.test
-		<input type="text" name="username" placeholder="管理者ID"/>
+		<input type="text" name="username" placeholder="管理者ID" required />
 		</div>
 		<div>
             admin
-		<input type="password" name="password" placeholder="パスワード"/>
+		<input type="password" name="password" placeholder="パスワード" required />
 		</div>
 		<input type="submit" value="ログイン" />
 	</form>

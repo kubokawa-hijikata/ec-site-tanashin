@@ -18,21 +18,26 @@
             <div class="col-9">
                 <h6 class="pt-4 fw-bold d-flex justify-content-center">お問い合わせはこちらから。</h6>
                 <hr />
-                <form id="contact-form" th:action="@{/contact}"  method="post">
+                <form id="contactForm" th:action="@{/contact}" method="post">
                     <dl class="mt-4 px-3">
-                        <dt><label class="fw-normal" for="name">お名前<span class="text-danger"> *</span></label></dt>
-                        <dd><input class="col-12 mt-2 py-1 px-2" type="text" th:name="name" placeholder="(例) 田中 太郎" /></dd>
+                        <dt><label class="fw-normal" for="name">お名前<span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label></dt>
+                        <dd><input class="col-12 mt-2 py-1 px-2" type="text" id="name" th:name="name" placeholder="(例) 田中 太郎" />
+                            <div class="text-danger font-small mt-1 mb-3 ms-1 height-small" id="nameMessage"></div></dd>
                         <dt><label class="fw-normal" for="phoneNumber">電話番号</label></dt>
-                        <dd><input class="col-12 mt-2 py-1 px-2" type="text" th:name="phoneNumber" placeholder="(例) 080-○○○○-△△△△" /></dd>
-                        <dt><label class="fw-normal" for="email">メールアドレス<span class="text-danger"> *</span></label></dt>
-                        <dd><input class="col-12 mt-2 py-1 px-2" type="text" th:name="email" placeholder="(例) sample@example.com" /></dd>
-                        <dt><label class="fw-normal" for="subject">件名<span class="text-danger"> *</span></label></dt>
-                        <dd><input class="col-12 mt-2 py-1 px-2" type="text" th:name="subject" /></dd>
-                        <dt><label class="fw-normal" for="content">お問い合わせ内容<span class="text-danger"> *</span></label></dt>
-                        <dd><textarea class="col-12 mt-2 py-1 px-2" name="content" cols="30" rows="5"></textarea></dd>
+                        <dd><input class="col-12 mt-2 py-1 px-2" type="text" id="phoneNumber" th:name="phoneNumber" placeholder="(例) 080△△△△○○○○" />
+                            <div class="text-danger font-small mt-1 mb-3 ms-1 height-small" id="phoneNumberMessage"></div></dd>
+                        <dt><label class="fw-normal" for="email">メールアドレス<span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label></dt>
+                        <dd><input class="col-12 mt-2 py-1 px-2" type="email" id="email" th:name="email" placeholder="(例) sample@example.com" />
+                            <div class="text-danger font-small mt-1 mb-3 ms-1 height-small" id="emailMessage"></div></dd>
+                        <dt><label class="fw-normal" for="subject">件名<span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label></dt>
+                        <dd><input class="col-12 mt-2 py-1 px-2" type="text" id="subject" th:name="subject" />
+                            <div class="text-danger font-small mt-1 mb-3 ms-1 height-small" id="subjectMessage"></div></dd>
+                        <dt><label class="fw-normal" for="content">お問い合わせ内容<span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label></dt>
+                        <dd><textarea class="col-12 mt-2 py-1 px-2" id="content" name="content" cols="30" rows="5"></textarea>
+                            <div class="text-danger font-small mb-3 ms-1 height-small" id="contentMessage"></div></dd>
                     </dl>
                     <div class="d-flex justify-content-center">
-                        <button class="col-5 text-white bg-black fw-bold rounded py-3 px-2 mt-3 my-5" type="submit" id="contact-button">確認する</button>
+                        <button class="col-5 text-white bg-black fw-bold rounded py-3 px-2 mt-3 my-5" type="submit" id="contactButton">確認する</button>
                     </div>
                 </form>
             </div>
