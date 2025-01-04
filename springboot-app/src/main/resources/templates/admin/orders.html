@@ -13,36 +13,40 @@
     <div th:replace="common/header :: headerFlagment"></div>
     <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
     <main>
-        <div>
-            <div>お客さんが注文した際、注文番号を乱数で生み出す。</div>
-        </div>
-        <div sec:authorize="hasAuthority('ADMIN')">
-            <table>
-                <tr>
-                    <th>注文日時</th>
-                    <th>注文番号(注文詳細)</th>
-                    <th>決済方法</th>
-                    <th>発送手続き</th>
-                </tr>
-                <tr th:each="order : ${orders}">
-                    <th:block th:if="${order.ship}">
-                        <td th:text="${order.date}"></td>
-                        <td>
-                            <a th:href="@{/admin/check-orders/{orderNumber}(orderNumber=${order.orderNumber})}" th:text="${order.orderNumber}"></a>
-                        </td>
-                        <td th:text="${order.payMethod}"></td>
-                        <td>完</td>
-                    </th:block>
-                    <th:block th:unless="${order.ship}">
-                        <td class="text-danger" th:text="${order.date}"></td>
-                        <td>
-                            <a th:href="@{/admin/check-orders/{orderNumber}(orderNumber=${order.orderNumber})}" th:text="${order.orderNumber}"></a>
-                        </td>
-                        <td class="text-danger" th:text="${order.payMethod}"></td>
-                        <td class="text-danger">未</td>
-                    </th:block>
-                </tr>
-            </table>
+        <div class="container work-width d-flex justify-content-start">
+            <div class="mx-2">
+                <div class="mt-4">
+                    <h4>注文情報</h4>
+                </div>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <table>
+                        <tr>
+                            <th>注文日時</th>
+                            <th>注文番号(注文詳細)</th>
+                            <th>決済方法</th>
+                            <th>発送手続き</th>
+                        </tr>
+                        <tr th:each="order : ${orders}">
+                            <th:block th:if="${order.ship}">
+                                <td th:text="${order.date}"></td>
+                                <td>
+                                    <a th:href="@{/admin/check-orders/{orderNumber}(orderNumber=${order.orderNumber})}" th:text="${order.orderNumber}"></a>
+                                </td>
+                                <td th:text="${order.payMethod}"></td>
+                                <td>完</td>
+                            </th:block>
+                            <th:block th:unless="${order.ship}">
+                                <td class="text-danger" th:text="${order.date}"></td>
+                                <td>
+                                    <a th:href="@{/admin/check-orders/{orderNumber}(orderNumber=${order.orderNumber})}" th:text="${order.orderNumber}"></a>
+                                </td>
+                                <td class="text-danger" th:text="${order.payMethod}"></td>
+                                <td class="text-danger">未</td>
+                            </th:block>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </main>
     <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->

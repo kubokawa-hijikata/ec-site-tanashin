@@ -6,6 +6,16 @@ $(function() {
   });
 });
 
+// ログアウト管理
+$(function() {
+  $("#logout").on('click', function() {
+    var result = confirm("ログアウトしますか。");
+    if (result) {
+      window.location.href = "/logout";
+    }
+  });
+});
+
 // 「イメージを追加する」ボタンを押下時に
 // さらに外部ファイルを読み取れるようにする
 var counter = 0;
@@ -14,7 +24,7 @@ $(document).on("click", "#addImage", function (e) {
   counter++;
    var newRow = jQuery(
               "<div id='image-repeat'>"+
-              "  <div class='row'>"+
+              "  <div class='row pt-2'>"+
               "    <div class='col-md-4 pr-1'>"+
               "      <input"+
               "        type='file'"+
