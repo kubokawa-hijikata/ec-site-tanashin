@@ -6,8 +6,15 @@
     <title th:text="${work.name}+'|Tanashin'"></title>
     <script src="https://kit.fontawesome.com/3c982ecd98.js" crossorigin="anonymous"></script>
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/slick.css" rel="stylesheet">
+    <link href="/css/slick-theme.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <style>
+        .slick-prev:before, .slick-next:before {
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <div th:replace="common/header :: headerFlagment"></div>
@@ -15,15 +22,53 @@
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
         <div class="container work-width">
-            <div class="row row-cols-1 row-cols-md-2 mt-4 mx-4 pb-4" style="background-color: #F4F3EF;">
-                <div class="col pt-4">
-                    <div th:if="${work.order}" class="d-flex justify-content-center position-relative">
-                        <img class="object-fit-contain work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
-                        <h5 class="ordered">SOLD OUT</h5>
+            <div class="row row-cols-1 row-cols-md-2 mt-4 mx-2 pb-4 rounded" style="background-color: #F4F3EF;">
+                <div class="col work-image-padding">
+
+                    <!-- 画面サイズがmd以下 -->
+                    <div class="work-md-container">
+                        <div th:if="${work.order}">
+                            <div class="slider slider-width">
+                                <div th:each="image : ${work.images}" class="d-flex justify-content-center position-relative">
+                                    <img class="object-fit-cover work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                    <h5 class="mdOrdered">SOLD OUT</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:unless="${work.order}">
+                            <div class="slider slider-width">
+                                <div th:each="image : ${work.images}" class="d-flex justify-content-center">
+                                    <img class="object-fit-cover work-image" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div th:unless="${work.order}" class="d-flex justify-content-center">
-                        <img class="object-fit-contain work-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+
+                    <!-- 画面サイズがlg以上 -->
+                    <div class="work-lg-container">
+                        <div th:if="${work.order}">
+                            <div class="d-flex ms-2 position-relative">
+                                <img id="mainMdImage" class="object-fit-cover work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+                                <h5 class="lgOrdered">SOLD OUT</h5>
+                            </div>
+                            <div class="d-flex mt-3 ms-2">
+                                <button type="button" class="col-2-5 p-0 border-0 me-2-5" th:each="image : ${work.images}" th:onclick="'makeMainMdImage('+ __${work.id}__ + ',&quot;' + __${image.name}__ +'&quot;)'">
+                                    <img class="object-fit-cover w-100" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                </button>
+                            </div>
+                        </div>
+                        <div th:unless="${work.order}">
+                            <div class="d-flex ms-2">
+                                <img id="mainLgImage" class="object-fit-cover work-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+                            </div>
+                            <div class="d-flex mt-3 ms-2">
+                                <button type="button" class="col-2-5 p-0 border-0 me-2-5" th:each="image : ${work.images}" th:onclick="'makeMainLgImage('+ __${work.id}__ + ',&quot;' + __${image.name}__ +'&quot;)'">
+                                    <img class="object-fit-cover w-100" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                </button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="col pt-4 pe-5">
                     <h6 class="fw-bold" th:text="${work.name}"></h6>
@@ -67,7 +112,16 @@
     <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
     <div th:replace="common/footer :: footerFlagment"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/slick.min.js"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <script src="/js/function.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.slider').slick({
+                arrows: true,
+                dots: true,
+            });
+        });
+    </script>
 </body>
 </html>

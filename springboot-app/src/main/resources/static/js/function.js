@@ -57,10 +57,20 @@ $(function() {
 // ポップアップ画面の表示、非表示
 function deleteCart(num) {
   $('.popup-wrapper' + num).show();
-}
+};
 function popupClose() {
   $('.popup-wrapper').hide();
-}
+};
+
+// 作品画面で他の画像を押下するとメイン画像が切り替わる
+function makeMainLgImage(workId,imageName) {
+  let img = document.getElementById("mainLgImage");
+  img.src = `/image/works/${workId}/${imageName}`;
+};
+function makeMainMdImage(workId,imageName) {
+  let img = document.getElementById("mainMdImage");
+  img.src = `/image/works/${workId}/${imageName}`;
+};
 
 // 問い合わせ画面でのバリデーションチェック
 document.addEventListener('DOMContentLoaded', function() {

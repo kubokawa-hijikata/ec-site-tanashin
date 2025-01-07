@@ -79,10 +79,14 @@ body {
     .work-width {
         max-width: 1200px;
     }
+    .work-image-padding {
+        padding-top: 1.5rem !important;
+    }
     .work-image {
-        max-height: 250px;
-        width: 100%;
-        height: 20vw;
+        height: 350px;
+        /* max-width: 600px;
+        height: 20vw; */
+        width: 90%;
         object-fit: cover;
     }
     .order-col > * {
@@ -94,6 +98,21 @@ body {
     .contact-width {
         width: 1000px;
     }
+    .work-md-container {
+        display: none;
+    }
+    .work-lg-container {
+        display: block;
+    }
+    .each-image-size {
+        max-height: 250px;
+        height: 20vw;
+        width: 100%;
+    }
+    .each-work-size {
+        height: 30vw;
+        max-height: 320px;
+    }
   }
 
 @media (max-width: 768px) {
@@ -103,11 +122,14 @@ body {
     .nav-container-margin {
         margin-left: 0px;
     }
+    .work-image-padding {
+        padding-top: 0.7rem !important;
+    }
     .work-image {
-        max-height: 150px;
-        width: 100%;
-        height: 40vh;
-        object-fit: cover;
+        /* max-height: 150px; */
+        max-width: 450px;
+        width: 95%;
+        object-fit: contain;
     }
     .order-col {
         display: flex;
@@ -119,6 +141,23 @@ body {
     }
     .contact-width {
         width: 95%;
+    }
+    .work-md-container {
+        display: block;
+    }
+    .work-lg-container {
+        display: none;
+    }
+    .work-width {
+        max-width: 730px;
+    }
+    .each-image-size {
+        max-height: 250px;
+        height: 25vw;
+        width: 42vw;
+    }
+    .each-work-size {
+        width: 44vw;
     }
 }
 
@@ -144,7 +183,14 @@ table td {
     opacity: 0.5;
 }
 
-.ordered {
+.lgOrdered {
+    position: absolute;/*重ねたい子要素にabsolute*/
+    top:50%;
+    left: 43%;
+    transform: translate(-50%,-50%);/*センター寄せの修正*/
+}
+
+.mdOrdered {
     position: absolute;/*重ねたい子要素にabsolute*/
     top:50%;
     left: 50%;
@@ -202,5 +248,14 @@ table td {
 }
 
 .cart-0-order {
-    width: 250px;
+  width: 250px;
+}
+
+.col-2-5 {
+  flex: 0 0 auto;
+  width: 20%;
+}
+
+.me-2-5 {
+  margin-right: 0.75rem !important;
 }

@@ -152,7 +152,7 @@
                     <div th:each="work : ${cartList}">
                         <div class="row">
                             <div class="col-5 pb-2">
-                                <img style="width: 100%; max-width: 200px;" class="object-fit-contain" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像" />
+                                <img style="width: 100%; max-width: 200px;" class="object-fit-cover" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像" />
                             </div>
                             <div class="col-7 d-flex justify-content-between">
                                 <div>
