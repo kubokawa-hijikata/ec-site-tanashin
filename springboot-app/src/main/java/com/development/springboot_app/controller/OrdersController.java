@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.development.springboot_app.entity.Customer;
 import com.development.springboot_app.entity.Images;
 import com.development.springboot_app.entity.Orders;
 import com.development.springboot_app.entity.Work;
+import com.development.springboot_app.services.ContactService;
 import com.development.springboot_app.services.CustomerService;
 import com.development.springboot_app.services.OrdersService;
 import com.development.springboot_app.services.SessionService;
@@ -36,13 +39,16 @@ public class OrdersController {
     private final WorkService workService;
     private final OrdersService ordersService;
     private final SessionService sessionService;
+    private final ContactService contactService;
 
     @Autowired
-    public OrdersController(CustomerService customerService, WorkService workService, OrdersService ordersService, SessionService sessionService) {
+    public OrdersController(CustomerService customerService, WorkService workService, 
+    OrdersService ordersService, SessionService sessionService, ContactService contactService) {
         this.customerService = customerService;
         this.workService = workService;
         this.ordersService = ordersService;
         this.sessionService = sessionService;
+        this.contactService = contactService;
     }
 
     @GetMapping("")
@@ -87,6 +93,7 @@ public class OrdersController {
 
     @PostMapping("")
     public String addCustomerInfo(Model model, Customer customer,
+    @RequestParam(value = "totalPrice") int totalPrice,
     HttpServletRequest request, HttpServletResponse response) {
 
         Orders order = new Orders();
@@ -97,8 +104,16 @@ public class OrdersController {
         order.setDate(timestamp);
         order.setShip(false);
         order.setCustomer(customer);
+        // 注文番号をランダムに生成
+        Random random = new Random();
+        double randomNumber = random.nextDouble();
+        String orderNumber = String.valueOf(randomNumber).split("\\.")[1];
+        orderNumber = orderNumber.substring(0, 4) + "-" + orderNumber.substring(4, 8) 
+        + "-" + orderNumber.substring(8, 12) + "-" + orderNumber.substring(12,16);
+
+
+        order.setOrderNumber(orderNumber);
         // 以下二つの処理がまだ
-        order.setOrderNumber(1234567866);
         order.setPayMethod("支払い処理はまた後で実装");
 
         for (Work work : cartList) {
@@ -106,11 +121,18 @@ public class OrdersController {
             updatedWork.setOrder(order);
         }
 
-        ordersService.addNew(order);
         customerService.addNew(customer);
+        ordersService.addNew(order);
+
+        StringBuilder sb = new StringBuilder(); 
+        for (Work work : cartList) {
+            sb.append(work.getName() + "：" + work.getPrice() + "円" + "\n");
+        }
 
         // カートの中身を削除する
         session.removeAttribute("cartList");
+
+        contactService.sendMessege(customer.getEmail(), customer, sb, totalPrice, orderNumber);
 
         // 商品購入完了場面を表示したい
         return "redirect:/";

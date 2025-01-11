@@ -25,7 +25,7 @@ public class Orders {
     private Integer id;
 
     @Column(name = "order_number")
-    private int orderNumber;
+    private String orderNumber;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
@@ -47,7 +47,7 @@ public class Orders {
 
     }
 
-    public Orders(Integer id, int orderNumber, Customer customer, List<Work> works, Date date, String payMethod, boolean ship) {
+    public Orders(Integer id, String orderNumber, Customer customer, List<Work> works, Date date, String payMethod, boolean ship) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.customer = customer;
@@ -65,11 +65,11 @@ public class Orders {
         this.id = id;
     }
 
-    public int getOrderNumber() {
+    public String getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
 

@@ -205,7 +205,7 @@ public class AdminController {
     @GetMapping("/check-orders/{orderNumber}")
     public String checkDetail(Model model,
     HttpServletRequest request, HttpServletResponse response,
-    @PathVariable("orderNumber") int orderNumber) {
+    @PathVariable("orderNumber") String orderNumber) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -226,7 +226,7 @@ public class AdminController {
     // 発送手続き状況を更新する
     @PostMapping("/update/{orderNumber}")
     public String update(Model model,
-    @PathVariable("orderNumber") int orderNumber,
+    @PathVariable("orderNumber") String orderNumber,
     @RequestParam("ship") boolean ship) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -45,14 +45,9 @@ public class ContactController {
         @RequestParam(value = "phoneNumber", required = false) String phoneNumber,
         @RequestParam(value = "email", required = true) String email,
         @RequestParam(value = "subject", required = true) String subject,
-        @RequestParam(value = "content", required = true) String content
-    ) {
-        String text = "お名前：" + name + "\n" 
-                    + "電話番号：" + phoneNumber + "\n"
-                    + "メールアドレス：" + email + "\n\n"
-                    + "問い合わせ内容：\n" + content;
-
-        contactService.getMessege(subject, text);
+        @RequestParam(value = "content", required = true) String content) {
+            
+        contactService.getMessege(subject, name, phoneNumber, email, content);
 
         return "contact";
     }

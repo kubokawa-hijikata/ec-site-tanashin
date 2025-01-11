@@ -25,7 +25,7 @@ public class OrdersService {
         return ordersRepository.findAll();
     }
 
-    public Orders findByOrderNumber(int orderNumber) {
+    public Orders findByOrderNumber(String orderNumber) {
         return ordersRepository.findByOrderNumber(orderNumber).orElseThrow(() -> new UsernameNotFoundException("注文が存在しません。"));
     }
     

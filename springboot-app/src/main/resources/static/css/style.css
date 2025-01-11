@@ -259,3 +259,7 @@ table td {
 .me-2-5 {
   margin-right: 0.75rem !important;
 }
+
+.order-detail-width {
+    width: 1300px;
+}
