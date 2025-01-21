@@ -97,8 +97,6 @@ public class OrdersController {
     HttpServletRequest request, HttpServletResponse response) {
 
         Orders order = new Orders();
-        HttpSession session = request.getSession();
-        ArrayList<Work> cartList = (ArrayList<Work>)session.getAttribute("cartList");
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         order.setDate(timestamp);
@@ -108,34 +106,22 @@ public class OrdersController {
         Random random = new Random();
         double randomNumber = random.nextDouble();
         String orderNumber = String.valueOf(randomNumber).split("\\.")[1];
+        // 注文番号が16桁未満の場合は16桁の番号が作られるまで生成し直す
+        while (orderNumber.length() < 16) {
+            randomNumber = random.nextDouble();
+            orderNumber = String.valueOf(randomNumber).split("\\.")[1];
+        }
         orderNumber = orderNumber.substring(0, 4) + "-" + orderNumber.substring(4, 8) 
-        + "-" + orderNumber.substring(8, 12) + "-" + orderNumber.substring(12,16);
-
-
+        + "-" + orderNumber.substring(8, 12) + "-" + orderNumber.substring(12, 16);
+        
         order.setOrderNumber(orderNumber);
-        // 以下二つの処理がまだ
-        order.setPayMethod("支払い処理はまた後で実装");
 
-        for (Work work : cartList) {
-            Work updatedWork = workService.getOne(work.getId());
-            updatedWork.setOrder(order);
-        }
+        sessionService.addCustomerInfo(customer, request, response);
+        sessionService.addOrderInfo(order, request, response);
 
-        customerService.addNew(customer);
-        ordersService.addNew(order);
+        model.addAttribute("totalPrice", totalPrice);
 
-        StringBuilder sb = new StringBuilder(); 
-        for (Work work : cartList) {
-            sb.append(work.getName() + "：" + work.getPrice() + "円" + "\n");
-        }
-
-        // カートの中身を削除する
-        session.removeAttribute("cartList");
-
-        contactService.sendMessege(customer.getEmail(), customer, sb, totalPrice, orderNumber);
-
-        // 商品購入完了場面を表示したい
-        return "redirect:/";
+        return "checkout";
     }
 
     @PostMapping("/delete/{workId}")

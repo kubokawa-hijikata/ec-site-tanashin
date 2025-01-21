@@ -52,7 +52,7 @@
         <a class="text-dark" th:href="@{/orders}">
           <button class="border-0" style="background-color: #FFFFFF;">
             <i class="fa-sharp fa-solid fa-cart-shopping"></i>
-            <span th:if="${cartSize} ne 0" class="cart-number d-flex justify-content-center align-items-center" th:text="${cartSize}"></span>
+            <span th:if="${cartSize} ne 0 AND ${cartSize}" class="cart-number d-flex justify-content-center align-items-center" th:text="${cartSize}"></span>
           </a>
         </form>
       </div>

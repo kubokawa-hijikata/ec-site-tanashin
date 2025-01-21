@@ -79,27 +79,27 @@
             <div class="mt-3 d-flex justify-content-center">
                 <h3>作品販売</h3>
             </div>
-            <form class="d-flex justify-content-center" th:object="${work}" th:action="@{/admin/post-work/addNew}" method="post" enctype="multipart/form-data" sec:authorize="hasAuthority('ADMIN')">
+            <form id="postForm" class="d-flex justify-content-center" th:object="${work}" th:action="@{/admin/post-work/addNew}" method="post" enctype="multipart/form-data" sec:authorize="hasAuthority('ADMIN')">
                 <div>
                     <label class="fs-5 mt-3">作品名</label>
                     <div>
-                        <input class="w-100 p-1" type="text" th:field="*{name}" />
+                        <input id="name" class="w-100 p-1" type="text" th:field="*{name}" required />
                     </div>
                     <label class="fs-5 mt-3">作品説明</label>
                     <div>
-                        <textarea class="w-100 p-1" type="text" cols="30" rows="5" th:field="*{description}"></textarea>
+                        <textarea id="description" class="w-100 p-1" type="text" cols="30" rows="5" th:field="*{description}" required></textarea>
                     </div>
                     <label class="fs-5 mt-3">縦の長さ(mm)</label>
                     <div>
-                        <input class="w-100 p-1" type="text" th:field="*{verticalSize}" />
+                        <input id="verticalSize" class="w-100 p-1" type="number" th:field="*{verticalSize}" required />
                     </div>
                     <label class="fs-5 mt-3">横の長さ(mm)</label>
                     <div>
-                        <input class="w-100 p-1" type="text" th:field="*{horizontalSize}" />
+                        <input id="horizontalSize" class="w-100 p-1" type="number" th:field="*{horizontalSize}" required />
                     </div>
                     <label class="fs-5 mt-3">値段</label>
                     <div>
-                        <input class="w-100 p-1" type="text" th:field="*{price}" />
+                        <input id="price" class="w-100 p-1" type="number" th:field="*{price}" required />
                     </div>
                     <label class="fs-5 mt-3">イメージ画像を追加</label>
                     <span class="font-small">※1枚目に選択した画像がメイン画像になります</span>
@@ -107,7 +107,7 @@
                         <div id="image-repeat">
                             <div class='row pt-2'>
                                 <div class='col-md-4 pr-1'>
-                                    <input type="file" placeholder="イメージ画像" name="imagesFile"/>
+                                    <input type="file" placeholder="イメージ画像" name="imagesFile" required />
                                 </div>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="mt-3">
-                        <button type="submit">販売する</button>
+                        <button type="submit" id="postButton">販売する</button>
                     </div>
                 </div>
             </form>

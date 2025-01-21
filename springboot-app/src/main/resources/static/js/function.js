@@ -75,63 +75,65 @@ function makeMainMdImage(workId,imageName) {
 // 問い合わせ画面でのバリデーションチェック
 document.addEventListener('DOMContentLoaded', function() {
   var targets = document.getElementById("contactForm");
-  // ▼送信直前で全項目を再度チェックしてエラーを数える：
-  targets.onsubmit = function (event) {
-
-    // 問い合わせ内容を送信時、二重送信防止。
-    // 送信ボタンを非活性にする。
-    const contactButton = document.getElementById("contactButton");
-    contactButton.disabled = true;
-
-    const blankCheck = /\S/g;
-    const phoneNumberPattern = /^(0{1}\d{9,10})$/;
-    // 入力情報を取得
-    const emailPattern = /^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
-    const name = document.getElementById('name').value;
-    const phoneNumber = document.getElementById('phoneNumber').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const content = document.getElementById('content').value;
-
-    var validation = true;
-
-    if(!name || !name.match(blankCheck)){
-      document.getElementById('nameMessage').innerHTML = "お名前を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('nameMessage').innerHTML = "";
-    }
-    if(!(!phoneNumber || phoneNumber.match(phoneNumberPattern))){
-      document.getElementById('phoneNumberMessage').innerHTML = "0から始まる10桁又は11桁の半角数字で入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('phoneNumberMessage').innerHTML = "";
-    }
-    if(!email || !email.match(emailPattern)){
-      document.getElementById('emailMessage').innerHTML = "メールアドレスを入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('emailMessage').innerHTML = "";
-    }
-    if(!subject || !subject.match(blankCheck)){
-      document.getElementById('subjectMessage').innerHTML = "件名を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('subjectMessage').innerHTML = "";
-    }
-    if(!content || !content.match(blankCheck)){
-      document.getElementById('contentMessage').innerHTML = "お問い合わせ内容を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('contentMessage').innerHTML = "";
-    }
-    if(!validation){
-      event.preventDefault();
-      // バリデーションチェックでエラーが出た際は、もう一度送信できるようボタンを活性化させる
-      contactButton.disabled = false;
-      return false;
-    } else {
-      return true;
+  if (targets) {
+    // ▼送信直前で全項目を再度チェックしてエラーを数える：
+    targets.onsubmit = function (event) {
+  
+      // 問い合わせ内容を送信時、二重送信防止。
+      // 送信ボタンを非活性にする。
+      const contactButton = document.getElementById("contactButton");
+      contactButton.disabled = true;
+  
+      const blankCheck = /\S/g;
+      const phoneNumberPattern = /^(0{1}\d{9,10})$/;
+      // 入力情報を取得
+      const emailPattern = /^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
+      const name = document.getElementById('name').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const content = document.getElementById('content').value;
+  
+      var validation = true;
+  
+      if(!name || !name.match(blankCheck)){
+        document.getElementById('nameMessage').innerHTML = "お名前を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('nameMessage').innerHTML = "";
+      }
+      if(!(!phoneNumber || phoneNumber.match(phoneNumberPattern))){
+        document.getElementById('phoneNumberMessage').innerHTML = "0から始まる10桁又は11桁の半角数字で入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('phoneNumberMessage').innerHTML = "";
+      }
+      if(!email || !email.match(emailPattern)){
+        document.getElementById('emailMessage').innerHTML = "メールアドレスを入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('emailMessage').innerHTML = "";
+      }
+      if(!subject || !subject.match(blankCheck)){
+        document.getElementById('subjectMessage').innerHTML = "件名を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('subjectMessage').innerHTML = "";
+      }
+      if(!content || !content.match(blankCheck)){
+        document.getElementById('contentMessage').innerHTML = "お問い合わせ内容を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('contentMessage').innerHTML = "";
+      }
+      if(!validation){
+        event.preventDefault();
+        // バリデーションチェックでエラーが出た際は、もう一度送信できるようボタンを活性化させる
+        contactButton.disabled = false;
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 });
@@ -139,85 +141,87 @@ document.addEventListener('DOMContentLoaded', function() {
 // 購入画面でのバリデーションチェック
 document.addEventListener('DOMContentLoaded', function() {
   var targets = document.getElementById("orderForm");
-  // ▼送信直前で全項目を再度チェックしてエラーを数える：
-  targets.onsubmit = function (event) {
-
-    // 購入者情報を送信時、二重送信防止。
-    // 送信ボタンを非活性にする。
-    const orderButton = document.getElementById("orderButton");
-    orderButton.disabled = true;
-
-    const blankCheck = /\S/g;
-    const emailPattern = /^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
-    const postalCodePattern = /^\d{7}$/;
-    // 入力情報を取得
-    const email = document.getElementById('email').value;
-    const lastName = document.getElementById('lastName').value;
-    const firstName = document.getElementById('firstName').value;
-    const postalCode = document.getElementById('postalCode').value;
-    const prefecture = document.getElementById('prefecture').value;
-    const city = document.getElementById('city').value;
-    const address = document.getElementById('address').value;
-    const building = document.getElementById('building').value;
-
-    var validation = true;
-
-    if(!email || !email.match(emailPattern)){
-      document.getElementById('emailMessage').innerHTML = "メールアドレスを入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('emailMessage').innerHTML = "";
-    }
-    if(!lastName || !lastName.match(blankCheck)){
-      document.getElementById('lastNameMessage').innerHTML = "性を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('lastNameMessage').innerHTML = "";
-    }
-    if(!firstName || !firstName.match(blankCheck)){
-      document.getElementById('firstNameMessage').innerHTML = "名を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('firstNameMessage').innerHTML = "";
-    }
-    if(!postalCode || !postalCode.match(postalCodePattern)){
-      document.getElementById('postalCodeMessage').innerHTML = "7桁の半角数字で入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('postalCodeMessage').innerHTML = "";
-    }
-    if(!prefecture){
-      document.getElementById('prefectureMessage').innerHTML = "都道府県を選択して下さい";
-      validation = false;
-    } else {
-      document.getElementById('prefectureMessage').innerHTML = "";
-    }
-    if(!city || !city.match(blankCheck)){
-      document.getElementById('cityMessage').innerHTML = "市区町村を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('cityMessage').innerHTML = "";
-    }
-    if(!address || !address.match(blankCheck)){
-      document.getElementById('addressMessage').innerHTML = "丁目・番地・号を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('addressMessage').innerHTML = "";
-    }
-    if(!(!building || building.match(blankCheck))){
-      document.getElementById('buildingMessage').innerHTML = "建物名を入力して下さい";
-      validation = false;
-    } else {
-      document.getElementById('buildingMessage').innerHTML = "";
-    }
-
-    if(!validation){
-      event.preventDefault();
-      // バリデーションチェックでエラーが出た際は、もう一度送信できるようボタンを活性化させる
-      orderButton.disabled = false;
-      return false;
-    } else {
-      return true;
+  if (targets) {
+    // ▼送信直前で全項目を再度チェックしてエラーを数える：
+    targets.onsubmit = function (event) {
+  
+      // 購入者情報を送信時、二重送信防止。
+      // 送信ボタンを非活性にする。
+      const orderButton = document.getElementById("orderButton");
+      orderButton.disabled = true;
+  
+      const blankCheck = /\S/g;
+      // const emailPattern = /^[a-zA-Z0-9_+-]+(\.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
+      const postalCodePattern = /^\d{7}$/;
+      // 入力情報を取得
+      // const email = document.getElementById('email').value;
+      const lastName = document.getElementById('lastName').value;
+      const firstName = document.getElementById('firstName').value;
+      const postalCode = document.getElementById('postalCode').value;
+      const prefecture = document.getElementById('prefecture').value;
+      const city = document.getElementById('city').value;
+      const address = document.getElementById('address').value;
+      const building = document.getElementById('building').value;
+  
+      var validation = true;
+  
+      // if(!email || !email.match(emailPattern)){
+      //   document.getElementById('emailMessage').innerHTML = "メールアドレスを入力して下さい";
+      //   validation = false;
+      // } else {
+      //   document.getElementById('emailMessage').innerHTML = "";
+      // }
+      if(!lastName || !lastName.match(blankCheck)){
+        document.getElementById('lastNameMessage').innerHTML = "性を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('lastNameMessage').innerHTML = "";
+      }
+      if(!firstName || !firstName.match(blankCheck)){
+        document.getElementById('firstNameMessage').innerHTML = "名を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('firstNameMessage').innerHTML = "";
+      }
+      if(!postalCode || !postalCode.match(postalCodePattern)){
+        document.getElementById('postalCodeMessage').innerHTML = "7桁の半角数字で入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('postalCodeMessage').innerHTML = "";
+      }
+      if(!prefecture){
+        document.getElementById('prefectureMessage').innerHTML = "都道府県を選択して下さい";
+        validation = false;
+      } else {
+        document.getElementById('prefectureMessage').innerHTML = "";
+      }
+      if(!city || !city.match(blankCheck)){
+        document.getElementById('cityMessage').innerHTML = "市区町村を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('cityMessage').innerHTML = "";
+      }
+      if(!address || !address.match(blankCheck)){
+        document.getElementById('addressMessage').innerHTML = "丁目・番地・号を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('addressMessage').innerHTML = "";
+      }
+      if(!(!building || building.match(blankCheck))){
+        document.getElementById('buildingMessage').innerHTML = "建物名を入力して下さい";
+        validation = false;
+      } else {
+        document.getElementById('buildingMessage').innerHTML = "";
+      }
+  
+      if(!validation){
+        event.preventDefault();
+        // バリデーションチェックでエラーが出た際は、もう一度送信できるようボタンを活性化させる
+        orderButton.disabled = false;
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 });

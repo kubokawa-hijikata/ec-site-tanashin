@@ -19,7 +19,7 @@
                 <div class="col col-md-6 pt-4 mb-3 rounded px-3" style="background-color: #F4F3EF;">
                     <form id="orderForm" th:object="${customer}" th:action="@{/orders}" method="post">
                         <dl>
-                            <dt>
+                            <!-- <dt>
                                 <label for="email" class="fw-normal">メールアドレス
                                 <span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label>
                             </dt>
@@ -29,11 +29,10 @@
                             <div class="d-flex justify-content-between">
                                 <span class="text-danger font-small mb-2 ms-1 height-small" id="emailMessage"></span>
                                 <span class="text-secondary font-small">(例) sumple@example.com</span>
-                            </div>
+                            </div> -->
+                            <dt><label class="fs-5 mb-2">お届け先情報</label></dt>
 
-                            <dt><label class="fs-5 mt-3 mb-2">お届け先情報</label></dt>
-
-                            <dt>
+                            <dt class="mt-2">
                                 <label for="name" class="fw-normal">お名前
                                 <span class="text-white bg-warning border rounded ms-2 p-1">必須</span></label>
                             </dt>
@@ -143,11 +142,11 @@
                                 </div>
                             </dd>
                         </dl>
-                        <input name="totalPrice" th:value="${totalPrice}" hidden />
+                        <input id="totalPrice" name="totalPrice" th:value="${totalPrice}" hidden />
                         <button class="col-12 text-white bg-black fw-bold rounded py-3 px-1 my-3" type="submit" id="orderButton">入力内容の確認へ</button>
                     </form>
                 </div>
-                <div class="col col-md-5 pt-4 mb-3 px-3 cart-margin rounded" style="background-color: #F4F3EF;">
+                <div class="col col-md-5 pt-4 pb-3 mb-3 px-3 cart-margin rounded h-100" style="background-color: #F4F3EF;">
                     <h6 class="fw-bold">カートに入っている商品</h6>
                     <hr />
                     <div th:each="work : ${cartList}">

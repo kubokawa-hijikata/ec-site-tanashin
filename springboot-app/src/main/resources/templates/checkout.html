@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A demo of a payment on Stripe" />
+    <title>Tanashin</title>
+    <script src="https://kit.fontawesome.com/3c982ecd98.js" crossorigin="anonymous"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/js/checkout.js" defer></script>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+</head>
+<body>
+    <div th:replace="common/header :: headerFlagment"></div>
+    <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
+    <main>
+        <!-- Display a payment form -->
+        <input id="totalPrice" name="totalPrice" th:value="${totalPrice}" hidden />
+        <div id="checkout" class="mb-3 p-3" style="background-color: #F4F3EF;">
+        <!-- Checkout will insert the payment form here -->
+        </div>
+    </main>
+    <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
+    <div th:replace="common/footer :: footerFlagment"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/function.js"></script>
+</body>
+</html>
