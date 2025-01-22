@@ -54,7 +54,25 @@ public class MainController {
     }
 
     // 「プライバシーポリシー」画面へ遷移する
+    @GetMapping("/privacy")
+    public String privacy(Model model,
+    HttpServletRequest request, HttpServletResponse response){
+
+        int cartSize = sessionService.getCartSize(request, response);
+        model.addAttribute("cartSize", cartSize);
+
+        return "privacy";
+    }
 
     // 「特定商取引法に基づく表記」画面へ遷移する
+    @GetMapping("/law")
+    public String law(Model model,
+    HttpServletRequest request, HttpServletResponse response) {
+
+        int cartSize = sessionService.getCartSize(request, response);
+        model.addAttribute("cartSize", cartSize);
+        
+        return "law";
+    }
     
 }

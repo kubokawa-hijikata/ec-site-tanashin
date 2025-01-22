@@ -209,7 +209,7 @@ table td {
 }
 
 .font-small {
-    font-size: small;
+    font-size: smaller;
 }
 .height-small {
     height: 13px;
@@ -262,4 +262,8 @@ table td {
 
 .order-detail-width {
     width: 1300px;
+}
+
+.privacy-law-font-size {
+    font-size: 0.9rem !important;
 }

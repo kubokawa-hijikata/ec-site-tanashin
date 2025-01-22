@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>特定商取引法に基づく表記|Tanashin</title>
+    <script src="https://kit.fontawesome.com/3c982ecd98.js" crossorigin="anonymous"></script>
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+</head>
+<body>
+    <div th:replace="common/header :: headerFlagment"></div>
+    <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
+    <main>
+        <!-- <main>タグ内を各ページに合わせて変更 -->
+        <div class="container contact-width mt-5 rounded d-flex justify-content-center" style="background-color: #F4F3EF;">
+            <div class="col-9">
+                <h6 class="pt-4 fw-bold d-flex justify-content-center">特定商取引法に基づく表記について</h6>
+                <hr />
+                <div class="mb-4 privacy-law-font-size">
+                    <p class="fw-bold">【販売業者】</p>
+                    久保川 奏希</br></br>
+                    <p class="fw-bold">【所在地】</p>
+                    東京都○○区○○町1-2-3</br></br>
+                    <p class="fw-bold">【電話番号】</p>
+                    03-1234-5678</br></br>
+                    <p class="fw-bold">【メールアドレス】</p>
+                    info@example.com</br></br>
+                    <p class="fw-bold">【販売価格】</p>
+                    商品ページに記載</br></br>
+                    <p class="fw-bold">【商品代金以外の必要料金】</p>
+                    送料、振込手数料（詳細は注文確認画面にてご案内）</br></br>
+                    <p class="fw-bold">【お支払い方法】</p>
+                    クレジットカード、銀行振込 </br></br>
+                    <p class="fw-bold">【お支払い期限】</p>
+                    注文日から7日以内</br></br>
+                    <p class="fw-bold">【商品の引渡時期】</p>
+                    ご注文確定後、○○日以内に発送）</br></br>
+                    <p class="fw-bold">【返品・交換について】</p>
+                    商品到着後7日以内にご連絡ください。詳細は返品ポリシーをご参照ください。</br></br>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
+    <div th:replace="common/footer :: footerFlagment"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/function.js"></script>
+</body>
+</html>
