@@ -54,7 +54,7 @@ public class ContactService {
 
         // 購入完了メールを送信する
         String text = customer.getLastName() + " " + customer.getFirstName() + " 様" + "\n\n"
-        + "この度は田中商店をご利用頂き誠にありがとうございます。" + "\n\n" 
+        + "この度は田中工房をご利用頂き誠にありがとうございます。" + "\n\n" 
         + "ご注文の変更、キャンセルをご希望の場合は、お早めにお問い合わせ下さいませ。" + "\n\n"
         + "お問い合わせのタイミングによりましては、対応できかねる場合がございます。" + "\n"
         + "あらかじめご了承下さい。" + "\n\n\n" 
@@ -75,7 +75,7 @@ public class ContactService {
             public void prepare(@SuppressWarnings("null") MimeMessage mimeMessage) throws Exception {
                 mimeMessage.setRecipient(Message.RecipientType.TO, 
                 new InternetAddress(toEmail));
-                mimeMessage.setFrom(new InternetAddress("tanaka.works2024@gmail.com", "田中商店", "UTF-8"));
+                mimeMessage.setFrom(new InternetAddress("tanaka.works2024@gmail.com", "田中工房", "UTF-8"));
                 mimeMessage.setSubject("ご購入ありがとうございます");
                 mimeMessage.setText(text);
             }

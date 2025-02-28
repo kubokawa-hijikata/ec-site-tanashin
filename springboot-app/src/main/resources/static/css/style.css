@@ -1,6 +1,52 @@
-body, .nav-bg {
-    background-color: #FFFFFF;
+.home-bg-image {
+    width: 100%;
+    height: 400px;
+    animation: image_anime 25s ease infinite;
+  }
+@keyframes image_anime {
+  0% {
+    background-image: url(/image/tanaka_chigasaki.jpeg);
+    opacity: 0.5;
+    object-fit: cover;
+    background-size: cover;
+  }
+  25% {
+    background-image: url(/image/tanaka_tora.jpeg); 
+    opacity: 0.5;
+    object-fit: cover;
+    background-size: cover;
+  }
+  50% {
+    background-image: url(/image/tanaka_kuki.jpeg);
+    opacity: 0.5;
+    object-fit: cover;
+    background-size: cover;
+  }
+  75% {
+    background-image: url(/image/tanaka_yuri.jpeg); 
+    opacity: 0.5;
+    object-fit: cover;
+    background-size: cover;
+  }
+  100% {
+    background-image: url(/image/tanaka_chigasaki.jpeg);
+    opacity: 0.8;
+    object-fit: cover;
+    background-size: cover;
+  }
 }
+
+body, .nav-bg {
+    background-color: rgb(40, 40, 40);
+    /* background-color: #FFF; */
+}
+body {
+    font-family: serif;
+}
+.bg-color {
+    background-color: rgb(40, 40, 40);
+}
+
 
 /* インスタのロゴを作成 */
 .insta_btn {
@@ -50,7 +96,6 @@ body, .nav-bg {
 /* navbarで{main}タグの上部分が隠れてしまうので50px分ずらす */
 body {
     padding-top: 50px;
-    padding-right: 0.5rem;
 }
 
 /* navbar内のプライバシーポリシー/特定商取引法に基づく表記について */
@@ -70,6 +115,9 @@ body {
 }
 
 @media (min-width: 768px) {
+    .header-title {
+        width: 90%;
+    }
     .nav-rules-container {
         display: none;
     }
@@ -77,6 +125,9 @@ body {
         margin-right: 0px;
     }
     .work-width {
+        max-width: 1200px;
+    }
+    .index-width {
         max-width: 1200px;
     }
     .work-image-padding {
@@ -151,13 +202,16 @@ body {
     .work-width {
         max-width: 730px;
     }
+    .index-width {
+        max-width: 730px;
+    }
     .each-image-size {
         max-height: 250px;
         height: 25vw;
         width: 42vw;
     }
     .each-work-size {
-        width: 44vw;
+        width: 46vw;
     }
 }
 
@@ -168,7 +222,7 @@ table {
 table,
 table th,
 table td {
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 table th,

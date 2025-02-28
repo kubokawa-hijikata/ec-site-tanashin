@@ -65,11 +65,11 @@ function popupClose() {
 // 作品画面で他の画像を押下するとメイン画像が切り替わる
 function makeMainLgImage(workId,imageName) {
   let img = document.getElementById("mainLgImage");
-  img.src = `/works/${workId}/${imageName}`;
+  img.src = `/image/works/${workId}/${imageName}`;
 };
 function makeMainMdImage(workId,imageName) {
   let img = document.getElementById("mainMdImage");
-  img.src = `/works/${workId}/${imageName}`;
+  img.src = `/image/works/${workId}/${imageName}`;
 };
 
 // 問い合わせ画面でのバリデーションチェック

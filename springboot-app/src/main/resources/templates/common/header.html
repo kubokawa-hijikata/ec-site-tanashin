@@ -3,61 +3,68 @@
 <body>
   <header th:fragment="headerFlagment" class="mb-2">
     <nav class="navbar navbar-expand-md nav-bg fixed-top">
-      <div class="container-fluid nav-container-margin">
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <div class="container-fluid nav-container-margin header-title">
+        <button class="navbar-toggler collapsed text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <a class="navbar-brand contact-color fs-5" href="/" style="color: goldenrod;">
+          <img class="ms-4 me-1" src="/image/favicon.ico" width="30px" />
+          田中工房</a>
         <!-- offcanvas-start でハンバーガーメニューを押下した際に左側から現れるか(offcanvas-start)、
          右側から現れるかを決めれる(offcanvas-end) -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <div class="offcanvas-header bg-color text-white">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">田中工房</h5>
+            <button type="button" data-bs-dismiss="offcanvas" aria-label="Close" class="bg-color border-0">
+              <i class="fa-solid fa-xmark text-white fs-3"></i>
+            </button>
           </div>
-          <div class="offcanvas-body">
+          <div class="offcanvas-body bg-color">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link mx-1" aria-current="page" href="/">Home</a>
+                <a class="nav-link mx-1 text-white" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-1" href="/about">About</a>
+                <a class="nav-link mx-1 text-white" href="/about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mx-1" href="/contact">Contact</a>
+                <a class="nav-link ms-1 text-white me-2" href="/contact">Contact</a>
               </li>
 
               <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="nav-link mx-1" href="/admin/post-work">作品販売</a>
+                <a class="nav-link mx-1 text-white" href="/admin/post-work">作品販売</a>
               </li>
               <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <a class="nav-link mx-1" href="/admin/check-orders">購入情報</a>
+                <a class="nav-link mx-1 text-white" href="/admin/check-orders">購入情報</a>
               </li>
               <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                <button id="logout" class="nav-link mx-1">ログアウト</button>
+                <button id="logout" class="nav-link mx-1 text-white">ログアウト</button>
               </li>
-
             </ul>
-            <ul class="ps-0 justify-content-end flex-grow-1 nav-rules-container">
+            <!-- <ul class="ps-0 justify-content-end flex-grow-1 nav-rules-container">
               <li class="nav-item list-unstyled mt-3">
                   <a class="nav-link nav-rules"  href="/privacy">プライバシーポリシー</a>
               </li>
               <li class="nav-item list-unstyled mt-2">
                   <a class="nav-link nav-rules"  href="/law">特定商取引法に基づく表記</a>
               </li>
-            </ul>
+            </ul> -->
           </div>
-          </div>
+        </div>
       </div>
-      <div class="cart-container d-flex">
+      <!-- <div class="cart-container d-flex">
         <a class="text-dark" th:href="@{/orders}">
           <button class="border-0" style="background-color: #FFFFFF;">
             <i class="fa-sharp fa-solid fa-cart-shopping"></i>
             <span th:if="${cartSize} ne 0 AND ${cartSize}" class="cart-number d-flex justify-content-center align-items-center" th:text="${cartSize}"></span>
           </a>
         </form>
-      </div>
+      </div> -->
     </nav>
-    <h1 class="fw-bold mt-4 text-center">田中工房</h1>
+    <!-- <div class="col-12 d-flex position-relativ text-white">
+      <div class="home-bg-image"></div>
+      <h1 class="fw-bold mt-4 text-center" style="position: absolute; top:20%; left: 25%; transform: translate(-50%,-50%);">田中工房</h1>
+    </div> -->
   </header>
 </body>
 </html>

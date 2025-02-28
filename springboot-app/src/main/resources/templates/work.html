@@ -19,10 +19,16 @@
 <body>
     <div th:replace="common/header :: headerFlagment"></div>
     <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
+    <div class="col-12 d-flex position-relativ text-white">
+      <div class="home-bg-image"></div>
+      <!-- <div class="fw-bold mt-4" style="position: absolute; top:30%; left: 25%; transform: translate(-50%,-50%);">
+      </div> -->
+    </div>
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
         <div class="container work-width">
-            <div class="row row-cols-1 row-cols-md-2 mt-4 mx-2 pb-4 rounded" style="background-color: #F4F3EF;">
+            <hr class="text-white mt-5" />
+            <div class="row row-cols-1 row-cols-md-2 mt-4 mx-2 pb-4 rounded bg-color text-white">
                 <div class="col work-image-padding">
 
                     <!-- 画面サイズがmd以下 -->
@@ -30,15 +36,16 @@
                         <div th:if="${work.order}">
                             <div class="slider slider-width">
                                 <div th:each="image : ${work.images}" class="d-flex justify-content-center position-relative">
-                                    <img class="object-fit-cover work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
-                                    <h5 class="mdOrdered">SOLD OUT</h5>
+                                    <!-- <img class="object-fit-cover work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                    <h5 class="mdOrdered">SOLD OUT</h5> -->
+                                    <img class="object-fit-cover work-image" th:src="'/image/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
                                 </div>
                             </div>
                         </div>
                         <div th:unless="${work.order}">
                             <div class="slider slider-width">
                                 <div th:each="image : ${work.images}" class="d-flex justify-content-center">
-                                    <img class="object-fit-cover work-image" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                    <img class="object-fit-cover work-image" th:src="'/image/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
                                 </div>
                             </div>
                         </div>
@@ -48,12 +55,13 @@
                     <div class="work-lg-container">
                         <div th:if="${work.order}">
                             <div class="d-flex ms-2 position-relative">
-                                <img id="mainMdImage" class="object-fit-cover work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
-                                <h5 class="lgOrdered">SOLD OUT</h5>
+                                <!-- <img id="mainMdImage" class="object-fit-cover work-image ordered-image" th:src="'/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
+                                <h5 class="lgOrdered">SOLD OUT</h5> -->
+                                <img id="mainMdImage" class="object-fit-cover work-image" th:src="'/image/works/'+${work.id}+'/'+${work.images[0].name}" alt="イメージ画像">
                             </div>
                             <div class="d-flex mt-3 ms-2">
                                 <button type="button" class="col-2-5 p-0 border-0 me-2-5" th:each="image : ${work.images}" th:onclick="'makeMainMdImage('+ __${work.id}__ + ',&quot;' + __${image.name}__ +'&quot;)'">
-                                    <img class="object-fit-cover w-100" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                    <img class="object-fit-cover w-100" th:src="'/image/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
                                 </button>
                             </div>
                         </div>
@@ -63,7 +71,7 @@
                             </div>
                             <div class="d-flex mt-3 ms-2">
                                 <button type="button" class="col-2-5 p-0 border-0 me-2-5" th:each="image : ${work.images}" th:onclick="'makeMainLgImage('+ __${work.id}__ + ',&quot;' + __${image.name}__ +'&quot;)'">
-                                    <img class="object-fit-cover w-100" th:src="'/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
+                                    <img class="object-fit-cover w-100" th:src="'/image/works/'+${work.id}+'/'+${image.name}" alt="イメージ画像">
                                 </button>
                             </div>
                         </div>
@@ -71,23 +79,24 @@
 
                 </div>
                 <div class="col pt-4 pe-5">
-                    <h6 class="fw-bold" th:text="${work.name}"></h6>
-                    ¥<span class="fw-bold fs-4" th:text="${work.price}"></span>
-                    <div class="mt-3">
-                        <p>
-                            日光による影響で色褪せてしまう場合がありますので、できるだけ日の当たらない場所でお飾りください。
-                            表面をこすらないようにお気をつけください。
-                        </p>
-                        <p>
-                            ※写真と実物のお色味が若干異なる場合があります。
-                        </p>
-                        <p>
-                            ▫️配送について
-                            クリックポストで、平日に郵便局窓口から発送いたします。
-                            発送した際に合わせて、追跡番号もご連絡いたします。
-                        </p>
+                    <div class="fw-bold">
+                        <span class="fs-5" th:text="${work.name}"></span>
                     </div>
-                    <div th:if="${work.order}">
+                    <div class="mt-3">
+                        <span class="fw-bold">参考価格:</span>
+                        <span>¥</span>
+                        <span class="fs-4" th:text="${work.price}"></span>
+                    </div>
+                    <div class="mt-1">
+                        <span class="fw-bold">作品サイズ:</span>
+                        <span class="fs-4" th:text="${work.verticalSize}"></span>mm×
+                        <span class="fs-4" th:text="${work.horizontalSize}"></span>mm
+                    </div>
+                    <div class="mt-2">
+                        <span class="fw-bold">説明:</span>
+                        <span th:text="${work.description}"></span>
+                    </div>
+                    <!-- <div th:if="${work.order}">
                         <button class="w-50 fw-bold rounded py-3 px-1 mt-3" disabled>カートに入れる</button>
                         <span class="text-danger text-decoration-none">※既に売り切れの商品です</span>
                     </div>
@@ -97,12 +106,12 @@
                             <span class="text-danger text-decoration-none">※既にカートに入っている商品です</span>
                         </div>
                         <a th:unless="${cartFlag}" th:href="@{/orders/add/{workId}(workId=${work.id})}" class="col-12 text-decoration-none">
-                            <button class="w-50 text-white bg-black fw-bold rounded py-3 px-1 mt-3">カートに入れる</button>
+                            <button class="w-50 text-white bg-color fw-bold rounded py-3 px-1 mt-3">カートに入れる</button>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="d-flex col-12" sec:authorize="hasAuthority('ADMIN')">
                         <a th:href="@{/admin/update-work/{workId}(workId=${work.id})}" class="col-12 text-decoration-none">
-                            <button class="w-50 text-white bg-black fw-bold rounded py-3 px-1 mt-3">作品を編集する</button>
+                            <button class="w-50 text-white bg-color fw-bold rounded py-3 px-1 mt-3">作品を編集する</button>
                         </a>
                     </div>
                 </div>

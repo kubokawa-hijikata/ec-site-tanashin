@@ -14,7 +14,7 @@
     <!-- ↑↑これより上は各ページ共通なので変更しない↑↑ -->
     <main>
         <!-- <main>タグ内を各ページに合わせて変更 -->
-        <div th:if="${cart}" class="container mt-5 work-width">
+        <div th:if="${cart}" class="container mt-5 index-width">
             <div class="row order-col justify-content-center">
                 <div class="col col-md-6 pt-4 mb-3 rounded px-3" style="background-color: #F4F3EF;">
                     <form id="orderForm" th:object="${customer}" th:action="@{/orders}" method="post">
@@ -143,7 +143,7 @@
                             </dd>
                         </dl>
                         <input id="totalPrice" name="totalPrice" th:value="${totalPrice}" hidden />
-                        <button class="col-12 text-white bg-black fw-bold rounded py-3 px-1 my-3" type="submit" id="orderButton">入力内容の確認へ</button>
+                        <button class="col-12 text-white bg-color fw-bold rounded py-3 px-1 my-3" type="submit" id="orderButton">入力内容の確認へ</button>
                     </form>
                 </div>
                 <div class="col col-md-5 pt-4 pb-3 mb-3 px-3 cart-margin rounded h-100" style="background-color: #F4F3EF;">
@@ -200,7 +200,7 @@
                 <i class="mt-3 fa-sharp fa-solid fa-cart-shopping text-black-50" style="font-size: 100px;"></i>
             </div>
             <h6 class="d-flex justify-content-center mt-4">カートに商品は入っていません</h6>
-            <a type="button" th:href="@{/}" class="d-flex justify-content-center mt-4 border rounded text-decoration-none text-white fw-bold bg-black py-3 px-4">ショップに戻る</a>
+            <a type="button" th:href="@{/}" class="d-flex justify-content-center mt-4 border rounded text-decoration-none text-white fw-bold bg-color py-3 px-4">ショップに戻る</a>
         </div>
     </main>
     <!-- ↓↓これより下は各ページ共通なので変更しない↓↓ -->
