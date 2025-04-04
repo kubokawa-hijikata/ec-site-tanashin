@@ -33,14 +33,6 @@ public class Server  {
         String YOUR_DOMAIN = "http://localhost:8080";
 
         HttpSession ses = request.getSession();
-
-        // ArrayList<Work> cartList = (ArrayList<Work>)ses.getAttribute("cartList");
-        // ArrayList<String> cartImages = new ArrayList<>();
-        // for (Work cart : cartList) {
-        //   cartImages.add("https://65ed-174-7-245-6.ngrok-free.app/works/" + cart.getId() + "/" + cart.getImages().get(0).getName());
-        // }
-        // ArrayList<Work> cartList = (ArrayList<Work>)ses.getAttribute("cartList");
-        // String cartImage = "https://65ed-174-7-245-6.ngrok-free.app/works/" + cartList.get(0).getId() + "/" + cartList.get(0).getImages().get(0).getName();
     
         SessionCreateParams params = SessionCreateParams.builder()
                     .setUiMode(SessionCreateParams.UiMode.EMBEDDED)
